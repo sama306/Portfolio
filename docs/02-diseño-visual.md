@@ -16,8 +16,8 @@ Resumen funcional (no memorizar los hex, usar el archivo de referencia):
 
 | Rol | Token Tailwind | Uso |
 |---|---|---|
-| Fondo base | `surface` / `background` | Fondo general del sitio, casi negro con tinte azulado (`#051424`) |
-| Fondo de cards/paneles | `surface-container`, `surface-container-low/high/highest` | Cards, bloques estructurales — capas tonales, no sombras |
+| Fondo base | `primary-container` (`#0f1115` — gris carbón neutro) | Fondo general del sitio, tal como lo usan los mockups (`bg-primary-container`). **`surface` (#051424) queda reservado para el footer**, no para el fondo base. |
+| Fondo de cards/paneles | `surface-variant` (ej. cards de proyectos, paneles "Process/Toolkit", bloques Skills) | Cards, bloques estructurales — capas tonales, no sombras |
 | Texto principal | `on-surface` | Texto de alto contraste |
 | Texto secundario | `on-surface-variant` | Descripciones, texto de apoyo |
 | Bordes | `outline-variant` | Borde sutil default de cards, inputs, badges |
@@ -66,10 +66,10 @@ Modelo **Fixed-Fluid Hybrid**: contenido dentro de un grid de max-width 1200px, 
 
 **Este sistema rechaza sombras pesadas.** Se usa **layering tonal** + **bordes de bajo contraste** en su lugar.
 
-1. **Nivel 0 (base):** color `surface`.
-2. **Nivel 1 (cards/secciones):** `surface-container` (o variantes `-low/-high/-highest` según cuánta jerarquía se necesite) con borde 1px sólido en `outline-variant`.
+1. **Nivel 0 (base):** color `primary-container`.
+2. **Nivel 1 (cards/secciones):** `surface-variant` con borde 1px sólido en `outline-variant`.
 3. **Profundidad interactiva:** en hover, los elementos **no se "levantan" con sombra**. En cambio, el borde transiciona a `tertiary` (cyan) o el fondo aclara levemente un nivel tonal. Esto aplica a botones secundarios, cards, badges, inputs en focus.
-4. **Glassmorphism:** reservado únicamente para el navbar persistente. `backdrop-filter: blur(12px)` con `surface-container` al 40% de opacidad, para mantener contexto del contenido scrolleando debajo.
+4. **Glassmorphism:** reservado únicamente para el navbar persistente. `backdrop-filter: blur(24px)` (`backdrop-blur-xl`) con `secondary-container` al 40% de opacidad, para mantener contexto del contenido scrolleando debajo (según mockups).
 
 Esta regla anula cualquier mención anterior de "sombra + elevación" en documentación previa — **no usar `box-shadow` para indicar hover en cards**, usar transición de borde.
 
@@ -96,7 +96,7 @@ full:    9999px    ← elementos circulares (status dot, avatares)
 - **Terciario:** solo texto, con subrayado animado que se expande desde el centro en hover.
 
 ### Cards (proyectos/videos)
-- Fondo: `surface-container` (o variante según contexto).
+- Fondo: `surface-variant`.
 - Borde: 1px `outline-variant`, transiciona a `tertiary` en hover.
 - Imagen: aspect ratio 16:9, **desaturada por default (`grayscale`)**, vuelve a color completo en hover — ver `07-animaciones.md` para el detalle de implementación. Esto reemplaza el efecto de "zoom + overlay" que estaba documentado antes; ahora es grayscale → color como efecto principal, y puede combinarse con un ícono de play centrado que aparece en hover (ver videos).
 

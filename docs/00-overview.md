@@ -76,12 +76,17 @@ La combinación desarrollo de software + experiencia audiovisual es el elemento 
 
 ## Referencia visual (Obsidian Slate)
 
-El sistema de diseño quedó definido a partir de un mockup de referencia, no a partir de cero. Los archivos fuente están en `docs/reference/`:
+El sistema de diseño quedó definido a partir de mockups de referencia, no a partir de cero. Los archivos fuente están en `docs/reference/`:
 
 - `docs/reference/DESIGN.md` — sistema de diseño en texto (colores, tipografía, spacing, componentes).
 - `docs/reference/videos-page-reference.html` — implementación real en HTML + Tailwind config, incluye la página de Videos completa como ejemplo funcional.
+- `docs/reference/home-reference.html` — mockup del Home completo (Hero → Trayectoria → Featured Work → Cinematic → Footer), en HTML + Tailwind config.
+- `docs/reference/projects-reference.html` — mockup de la página de Proyectos (bento grid + technical explorations).
+- `docs/reference/videos-detail-reference.html` — mockup de la página de Videos con detalle (Process/Toolkit + grid de videos).
 
-`02-diseño-visual.md` es el resumen operativo de esos dos archivos — ante cualquier valor exacto (hex, spacing, radius) que no esté claro, consultar los archivos de `reference/` directamente en vez de asumir.
+Los mockups originales provienen del folder `stitch_personal_portfolio_showcase` (en el Desktop de la máquina local); las copias en `docs/reference/` son la versión que se usa como fuente de verdad en el repo.
+
+`02-diseño-visual.md` es el resumen operativo de esos archivos — ante cualquier valor exacto (hex, spacing, radius) que no esté claro, consultar los archivos de `reference/` directamente en vez de asumir.
 
 **Cambio de alcance importante respecto a la primera versión de esta documentación:** la sección/página de **Experiencia como entidad separada se elimina**. La experiencia (desarrollo + audiovisual) se fusiona dentro de la sección **"Trayectoria"** del Home, junto con Educación, en formato timeline de dos columnas. Ver `03-secciones-home.md`.
 
@@ -106,3 +111,6 @@ Astro debe manejar la mayor parte del sitio como HTML estático. React se usa **
 | `10-roadmap.md` | Fases de desarrollo |
 | `reference/DESIGN.md` | Sistema de diseño original (fuente de verdad) |
 | `reference/videos-page-reference.html` | Implementación HTML/Tailwind de referencia |
+| `reference/home-reference.html` | Mockup del Home (HTML/Tailwind) |
+| `reference/projects-reference.html` | Mockup de Proyectos (HTML/Tailwind) |
+| `reference/videos-detail-reference.html` | Mockup de Videos detalle (HTML/Tailwind) |

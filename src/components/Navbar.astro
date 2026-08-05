@@ -8,20 +8,20 @@
     // Cambio sutil al scrollear: se intensifica la opacidad del fondo glass.
     const scrolled = window.scrollY > 24;
     nav.style.backgroundColor = scrolled
-      ? 'rgba(18, 33, 49, 0.85)'
-      : 'rgba(18, 33, 49, 0.4)'; // surface-container "#122131"
+      ? 'rgba(67, 71, 78, 0.85)'
+      : 'rgba(67, 71, 78, 0.4)'; // secondary-container "#43474e"
   };
   window.addEventListener('scroll', update, { passive: true });
   update();
 </script>
 
 <!--
-  Navbar fija con glassmorphism (blur + surface-container 40%).
+  Navbar fija con glassmorphism (blur + secondary-container 40%).
   Glass reservado únicamente para la barra persistente (ver 02-diseño-visual.md).
 -->
 <nav
   data-navbar
-  class="fixed top-0 z-50 w-full border-b border-outline-variant bg-surface-container/40 backdrop-blur-md transition-colors duration-300"
+  class="fixed top-0 z-50 w-full border-b border-outline-variant bg-secondary-container/40 backdrop-blur-xl transition-colors duration-300"
 >
   <div class="mx-auto flex h-20 w-full max-w-[1200px] items-center justify-between px-gutter">
     <!-- Wordmark (placeholder de texto, no un logo) -->

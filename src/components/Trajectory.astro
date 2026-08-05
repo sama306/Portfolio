@@ -25,16 +25,28 @@ const educacion = experience.filter((item) => item.type === 'educacion');
         {
           experiencia.map((item, index) => (
             <li class="flex gap-5">
-              <!-- Timeline: dot + línea conectora -->
+              <!-- Timeline: dot con halo + línea conectora -->
               <div class="flex flex-col items-center" aria-hidden="true">
-                <span class="mt-1.5 h-3 w-3 shrink-0 rounded-full bg-tertiary"></span>
+                <span
+                  class:list={[
+                    'mt-1.5 h-2 w-2 shrink-0 rounded-full ring-4 ring-primary-container',
+                    index === 0 ? 'bg-tertiary' : 'bg-surface-variant',
+                  ]}
+                ></span>
                 {index < experiencia.length - 1 && (
                   <span class="mt-1 w-px flex-1 bg-outline-variant"></span>
                 )}
               </div>
 
               <div class={index < experiencia.length - 1 ? 'min-w-0 flex-1 pb-12' : 'min-w-0 flex-1'}>
-                <p class="font-label-caps text-label-caps text-tertiary">{item.period}</p>
+                <p
+                  class:list={[
+                    'font-label-caps text-label-caps',
+                    index === 0 ? 'text-tertiary' : 'text-on-surface-variant',
+                  ]}
+                >
+                  {item.period}
+                </p>
                 <h3 class="mt-2 font-body-lg text-body-lg text-on-surface">
                   {item.title}
                   {item.organization && (
@@ -83,7 +95,7 @@ const educacion = experience.filter((item) => item.type === 'educacion');
           educacion.map((item) => (
             <div>
               <p class="flex items-center gap-2 font-label-caps text-label-caps text-tertiary">
-                <span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span>
+                <span class="h-2 w-2 rounded-full bg-tertiary ring-4 ring-primary-container" aria-hidden="true"></span>
                 {item.period}
               </p>
               <h3 class="mt-2 font-body-lg text-body-lg text-on-surface">{item.title}</h3>

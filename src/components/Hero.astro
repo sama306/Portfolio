@@ -16,8 +16,8 @@
     <div class="flex flex-col lg:col-span-7">
       <!-- Status dot pulsante en tertiary -->
       <div class="flex items-center gap-3">
-        <span class="status-dot h-2.5 w-2.5 rounded-full bg-tertiary" aria-hidden="true"></span>
-        <span class="font-label-caps text-label-caps text-on-surface-variant">
+        <span class="status-dot h-3 w-3 rounded-full bg-tertiary" aria-hidden="true"></span>
+        <span class="font-label-caps text-label-caps text-tertiary">
           Disponible para nuevos proyectos
         </span>
       </div>
@@ -53,10 +53,15 @@
       </div>
     </div>
 
-    <!-- Visual lateral — Opción B simplificada (composición abstracta/tecnológica) -->
-    <div class="flex lg:col-span-5 lg:justify-center">
+    <!-- Visual lateral — Opción B simplificada (composición abstracta/tecnológica)
+         con el tratamiento de frame offset del mockup (borde outline-variant, offset en hover). -->
+    <div class="relative flex lg:col-span-5 lg:justify-center">
       <div
-        class="w-full max-w-md overflow-hidden rounded-lg border border-outline-variant bg-surface-container lg:max-w-none"
+        class="absolute inset-0 z-0 -translate-y-4 translate-x-4 rounded-lg border border-outline-variant transition-transform duration-500 lg:max-w-none"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="group relative z-10 w-full max-w-md overflow-hidden rounded-lg border border-outline-variant bg-surface-container transition-all duration-500 hover:-translate-y-4 hover:translate-x-4 lg:max-w-none"
         aria-hidden="true"
       >
         <svg viewBox="0 0 400 460" class="block h-auto w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
