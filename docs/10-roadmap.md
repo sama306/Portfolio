@@ -21,7 +21,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Trayectoria (2 columnas: Experiencia + Educación, fusiona lo que antes era Experiencia/Educación separadas)
 - [x] Skills
 - [x] Featured Work (preview de 2 proyectos destacados)
-- [ ] Cinematic Editing (preview de 3 trabajos audiovisuales)
+- [x] Cinematic Editing (preview de 3 trabajos audiovisuales)
 - [ ] Contacto
 
 ## Fase 3 — Proyectos

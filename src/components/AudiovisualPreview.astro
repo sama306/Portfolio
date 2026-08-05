@@ -1,0 +1,59 @@
+---
+import { videos } from '../data/videos';
+
+// Cinematic Editing — sección 5 del Home (ver 03-secciones-home.md §5).
+// Preview de los trabajos audiovisuales con `featured: true` (content-driven,
+// src/data/videos.ts). Cards chicas inline (VideoCard.astro se crea en Fase 4).
+// Sin animaciones de scroll (Fase 5). Estructura replicada del mockup de
+// referencia home-reference.html §videos (border-t + py-section-gap).
+const featured = videos.filter((video) => video.featured);
+---
+
+<section id="videos" class="mx-auto w-full max-w-[1200px] border-t border-outline-variant px-gutter py-section-gap">
+  <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <div>
+      <h2 class="font-headline-md text-headline-md text-on-surface">Cinematic Editing</h2>
+      <p class="mt-2 font-body-md text-body-md text-on-surface-variant">
+        Producción audiovisual inmobiliaria.
+      </p>
+    </div>
+    <a
+      href="/videos"
+      class="group relative inline-block pb-2 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:text-tertiary"
+    >
+      Ver más <span aria-hidden="true">→</span>
+      <span
+        class="absolute bottom-0 left-1/2 h-[2px] w-0 bg-tertiary transition-all duration-300 group-hover:left-0 group-hover:w-full"
+        aria-hidden="true"
+      ></span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 gap-element-gap md:grid-cols-3">
+    {
+      featured.map((video) => (
+        <article class="group cursor-pointer">
+          <div class="relative mb-4 aspect-video overflow-hidden rounded-lg border border-outline-variant">
+            <img
+              class="h-full w-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"
+              src={video.thumbnail}
+              alt={`Vista previa de ${video.title}`}
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              class="absolute inset-0 flex items-center justify-center bg-primary-container/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
+              aria-hidden="true"
+            >
+              <span class="material-symbols-outlined text-4xl text-tertiary">play_circle</span>
+            </div>
+          </div>
+          <h3 class="font-body-md text-body-md font-semibold text-on-surface">{video.title}</h3>
+          <p class="mt-1 font-body-md text-body-md text-sm text-on-surface-variant">
+            {video.duration} • {video.tag}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>
