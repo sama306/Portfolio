@@ -20,7 +20,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Hero (headline, presentación, status dot, imagen/gráfico lateral)
 - [x] Trayectoria (2 columnas: Experiencia + Educación, fusiona lo que antes era Experiencia/Educación separadas)
 - [x] Skills
-- [ ] Featured Work (preview de 2 proyectos destacados)
+- [x] Featured Work (preview de 2 proyectos destacados)
 - [ ] Cinematic Editing (preview de 3 trabajos audiovisuales)
 - [ ] Contacto
 

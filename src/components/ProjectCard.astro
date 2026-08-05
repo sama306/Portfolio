@@ -1,0 +1,63 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const href = `/projects/${project.slug}`;
+---
+
+<!--
+  ProjectCard — versión compacta para "Featured Work" del Home
+  (ver 03-secciones-home.md §4 y 04-proyectos.md). En /projects se usa
+  un patrón de card distinto (masonry, sin botón, toda la card clickeable).
+  Imagen 16:9 desaturada que vuelve a color en hover (grayscale → color).
+  Borde outline-variant → tertiary en hover, sin sombras ni scale (02-diseño-visual.md).
+-->
+
+<a
+  href={href}
+  class="group block overflow-hidden rounded-lg border border-outline-variant bg-surface-variant transition-colors duration-300 hover:border-tertiary"
+>
+  <!-- Imagen mockup fotográfico (16:9), grayscale → color + leve zoom en hover -->
+  <div class="relative aspect-video overflow-hidden">
+    <img
+      class="h-full w-full object-cover filter grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+      src={project.image}
+      alt={`Vista previa de ${project.title}`}
+      loading="lazy"
+      decoding="async"
+    />
+    <div
+      class="absolute inset-0 bg-primary-container/20 transition-colors duration-500 group-hover:bg-transparent"
+      aria-hidden="true"
+    ></div>
+  </div>
+
+  <div class="p-8">
+    <!-- Título + año -->
+    <div class="mb-4 flex items-start justify-between gap-4">
+      <div>
+        <h3 class="font-body-lg text-body-lg font-semibold text-on-surface">{project.title}</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant">{project.subtitle}</p>
+      </div>
+      {project.year && (
+        <span class="rounded-full bg-tertiary/10 px-3 py-1 font-label-caps text-label-caps text-tertiary">
+          {project.year}
+        </span>
+      )}
+    </div>
+
+    <!-- Descripción corta -->
+    <p class="mb-6 font-body-md text-body-md text-on-surface-variant">{project.description}</p>
+
+    <!-- Botón ghost ancho completo -->
+    <span
+      class="block w-full rounded border border-outline-variant py-3 text-center font-label-caps text-label-caps text-on-surface transition-colors duration-300 group-hover:border-tertiary group-hover:text-tertiary"
+    >
+      Ver proyecto
+    </span>
+  </div>
+</a>
