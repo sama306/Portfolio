@@ -1,0 +1,146 @@
+---
+---
+<!--
+  Hero — sección 1 del Home (ver 03-secciones-home.md §1).
+  Contenido 100% estático (Fase 2). Sin animaciones de scroll (Fase 5).
+  Hover states de botones/links: parte del sistema de diseño base (02-diseño-visual.md).
+  Visual lateral: Opción B simplificada (composición abstracta/tecnológica), en vez de foto real.
+  El texto decorativo grande de fondo se deja afuera (a evaluar después). Copy del headline provisional.
+-->
+
+<section class="relative">
+  <div
+    class="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-12 px-gutter pb-16 lg:grid-cols-12 lg:gap-6"
+  >
+    <!-- Columna de contenido -->
+    <div class="flex flex-col lg:col-span-7">
+      <!-- Status dot pulsante en tertiary -->
+      <div class="flex items-center gap-3">
+        <span class="status-dot h-2.5 w-2.5 rounded-full bg-tertiary" aria-hidden="true"></span>
+        <span class="font-label-caps text-label-caps text-on-surface-variant">
+          Disponible para nuevos proyectos
+        </span>
+      </div>
+
+      <!-- Headline provisional en 2 líneas (copy a definir con el usuario) -->
+      <h1
+        class="font-display-lg text-display-lg-mobile text-on-surface sm:text-display-lg"
+      >
+        <span class="block">Precisión técnica.</span>
+        <span class="block">Impacto real.</span>
+      </h1>
+
+      <!-- Presentación -->
+      <p class="mt-8 max-w-xl font-body-lg text-body-lg text-on-surface-variant">
+        Soy estudiante de Tecnicatura en Programación Informática y desarrollador enfocado en crear
+        soluciones digitales — combinando lógica de software con producción audiovisual.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="/projects"
+          class="font-label-caps text-label-caps rounded bg-tertiary px-8 py-4 text-on-tertiary transition-colors duration-300 hover:bg-tertiary-fixed-dim"
+        >
+          Ver proyectos
+        </a>
+        <a
+          href="#contacto"
+          class="font-label-caps text-label-caps rounded border border-outline-variant px-8 py-4 text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+        >
+          Contactarme
+        </a>
+      </div>
+    </div>
+
+    <!-- Visual lateral — Opción B simplificada (composición abstracta/tecnológica) -->
+    <div class="flex lg:col-span-5 lg:justify-center">
+      <div
+        class="w-full max-w-md overflow-hidden rounded-lg border border-outline-variant bg-surface-container lg:max-w-none"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 400 460" class="block h-auto w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="heroGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0H0V40" fill="none" stroke="var(--color-outline-variant)" stroke-opacity="0.16" />
+            </pattern>
+            <radialGradient id="heroPeak" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--color-tertiary)" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="var(--color-tertiary)" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <!-- Fondo con grilla de hairlines -->
+          <rect width="400" height="460" fill="url(#heroGrid)" />
+
+          <!-- Marco arquitectónico -->
+          <rect x="32" y="32" width="336" height="396" stroke="var(--color-on-surface-variant)" stroke-opacity="0.12" />
+
+          <!-- Dial minimalista -->
+          <circle cx="118" cy="118" r="66" stroke="var(--color-outline-variant)" stroke-opacity="0.5" />
+          <line x1="118" y1="118" x2="160" y2="86" stroke="var(--color-tertiary)" stroke-opacity="0.7" stroke-width="2" />
+
+          <!-- Ejes -->
+          <line x1="56" y1="430" x2="340" y2="430" stroke="var(--color-on-surface-variant)" stroke-opacity="0.35" />
+          <line x1="56" y1="52" x2="56" y2="430" stroke="var(--color-on-surface-variant)" stroke-opacity="0.2" />
+
+          <!-- Plot ascendente -->
+          <polyline
+            points="56,400 110,368 150,300 195,314 240,218 285,130 315,148 340,88"
+            stroke="var(--color-on-surface-variant)"
+            stroke-opacity="0.5"
+            stroke-width="1.5"
+          />
+
+          <!-- Nodos -->
+          <g fill="var(--color-on-surface-variant)" opacity="0.6">
+            <rect x="106" y="364" width="8" height="2.5" />
+            <rect x="146" y="296" width="8" height="2.5" />
+            <rect x="191" y="310" width="8" height="2.5" />
+            <rect x="236" y="214" width="8" height="2.5" />
+            <rect x="281" y="126" width="8" height="2.5" />
+            <rect x="311" y="144" width="8" height="2.5" />
+          </g>
+
+          <!-- Acento cyan: pico + glow sutil + línea de referencia -->
+          <circle cx="340" cy="88" r="34" fill="url(#heroPeak)" />
+          <line x1="340" y1="88" x2="340" y2="430" stroke="var(--color-tertiary)" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3,4" />
+          <circle cx="340" cy="88" r="3.5" fill="var(--color-tertiary)" />
+          <rect x="332" y="426" width="16" height="2.5" fill="var(--color-tertiary)" opacity="0.8" />
+
+          <!-- Micro-labels técnicos (Geist, uppercase) -->
+          <g fill="var(--color-on-surface-variant)" opacity="0.55" font-family="Geist, monospace" font-size="10" letter-spacing="2">
+            <text x="48" y="26">LAT / CODE</text>
+            <text x="313" y="118" fill="var(--color-tertiary)">MAX</text>
+            <text x="48" y="452">x:0 · y:1</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Status dot pulsante (componente base, no una animación de scroll — Fase 2). */
+  .status-dot {
+    animation: hero-status-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes hero-status-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(0, 220, 229, 0.35);
+    }
+    50% {
+      opacity: 0.9;
+      box-shadow: 0 0 0 5px rgba(0, 220, 229, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot {
+      animation: none;
+    }
+  }
+</style>

@@ -117,6 +117,7 @@
 @layer base {
   /* La superficie base es "almost black" con tinte azulado (surface). */
   html {
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -133,6 +134,12 @@
   ::selection {
     background-color: var(--color-tertiary);
     color: var(--color-on-tertiary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
