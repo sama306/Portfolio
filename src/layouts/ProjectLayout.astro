@@ -1,0 +1,217 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  prev?: Project | null;
+  next?: Project | null;
+}
+
+const { project, prev, next } = Astro.props;
+
+const CATEGORY_LABELS: Record<Project['category'], string> = {
+  web: 'Web',
+  desktop: 'Desktop',
+  mobile: 'Mobile',
+  backend: 'Backend',
+  database: 'Bases de datos',
+  other: 'Otros',
+};
+
+/*
+  ProjectLayout — página individual de proyecto, layout reutilizable
+  (ver 04-proyectos.md §"Página individual de proyecto").
+  Renderiza solo las subsecciones presentes en el objeto Project
+  (content-driven): Descripción, Objetivo, Problema, Solución,
+  Arquitectura (bloque code-block-border), Funcionalidades / Desafíos /
+  Aprendizajes (listas ">"), Tecnologías (badges), Imágenes (galería).
+  Estilo: paneles surface-variant + code-block-border + badges label-caps
+  (patrón de videos-detail-reference.html y TechnicalExplorations.astro).
+*/
+
+// Subsecciones de "Información" presentes, en el orden de 04-proyectos.md.
+const sections: { label: string; kind: 'text' | 'code' | 'list'; content: string | string[] }[] = [];
+if (project.description) sections.push({ label: 'Descripción', kind: 'text', content: project.description });
+if (project.goal) sections.push({ label: 'Objetivo', kind: 'text', content: project.goal });
+if (project.problem) sections.push({ label: 'Problema', kind: 'text', content: project.problem });
+if (project.solution) sections.push({ label: 'Solución', kind: 'text', content: project.solution });
+if (project.architecture) sections.push({ label: 'Arquitectura', kind: 'code', content: project.architecture });
+if (project.features && project.features.length > 0)
+  sections.push({ label: 'Funcionalidades', kind: 'list', content: project.features });
+if (project.challenges && project.challenges.length > 0)
+  sections.push({ label: 'Desafíos', kind: 'list', content: project.challenges });
+if (project.learnings && project.learnings.length > 0)
+  sections.push({ label: 'Aprendizajes', kind: 'list', content: project.learnings });
+
+// Galería: usa las screenshots si hay, si no cae a la imagen principal.
+const screenshots = project.screenshots && project.screenshots.length > 0 ? project.screenshots : [project.image];
+---
+
+<main class="mx-auto w-full max-w-[1200px] flex-1 px-gutter pb-section-gap pt-32">
+  <!-- ─── Hero ─────────────────────────────────────────────── -->
+  <header>
+    <a
+      href="/projects"
+      class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
+    >
+      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+      Volver a proyectos
+    </a>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <span class="rounded border border-outline-variant px-3 py-1 font-label-caps text-label-caps text-on-surface-variant">
+        {CATEGORY_LABELS[project.category]}
+      </span>
+      {project.year && (
+        <span class="rounded-full bg-tertiary/10 px-3 py-1 font-label-caps text-label-caps text-tertiary">
+          {project.year}
+        </span>
+      )}
+    </div>
+
+    <h1 class="mt-6 font-headline-md text-headline-md text-on-surface md:text-[40px]">{project.title}</h1>
+    <p class="mt-4 max-w-2xl font-body-lg text-body-lg text-on-surface-variant">{project.description}</p>
+
+    <!-- Links: botones secundarios ghost (02-diseño-visual.md) -->
+    <div class="mt-8 flex flex-wrap gap-3">
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded border border-outline-variant px-6 py-3 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+        >
+          GitHub
+        </a>
+      )}
+      {project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded border border-outline-variant px-6 py-3 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+        >
+          Demo
+        </a>
+      )}
+    </div>
+  </header>
+
+  <!-- ─── Información (solo subsecciones presentes) ─────────── -->
+  {
+    sections.length > 0 && (
+      <section class="mt-section-gap">
+        <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+          Información
+        </h2>
+        <div class="mt-element-gap grid grid-cols-1 gap-gutter md:grid-cols-2">
+          {
+            sections.map((section) => (
+              <div class="rounded-lg border border-outline-variant bg-surface-variant p-8">
+                <p class="mb-4 font-label-caps text-label-caps text-on-surface-variant">{section.label}</p>
+
+                {section.kind === 'text' && (
+                  <p class="font-body-md text-body-md text-on-surface">{section.content as string}</p>
+                )}
+
+                {section.kind === 'code' && (
+                  <div class="code-block-border overflow-x-auto rounded bg-surface-container p-5">
+                    <pre class="whitespace-pre-line font-mono-code text-mono-code text-on-surface-variant"><code>{
+                        section.content as string
+                      }</code></pre>
+                  </div>
+                )}
+
+                {section.kind === 'list' && (
+                  <ul class="code-block-border list-none space-y-2 rounded bg-surface-container p-5">
+                    {
+                      (section.content as string[]).map((item) => (
+                        <li class="font-mono-code text-mono-code text-on-surface-variant">&gt; {item}</li>
+                      ))
+                    }
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ─── Imágenes ─────────────────────────────────────────── -->
+  <section class="mt-section-gap">
+    <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+      Imágenes
+    </h2>
+    <div class="mt-element-gap grid grid-cols-1 gap-gutter md:grid-cols-2">
+      {
+        screenshots.map((src, index) => (
+          <div class="group overflow-hidden rounded-lg border border-outline-variant bg-surface-container transition-colors duration-300 hover:border-tertiary">
+            <img
+              class="h-full w-full object-cover object-top filter grayscale transition-all duration-700 group-hover:grayscale-0"
+              src={src}
+              alt={`Vista ${index + 1} de ${project.title}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ─── Tecnologías ──────────────────────────────────────── -->
+  <section class="mt-section-gap">
+    <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+      Tecnologías
+    </h2>
+    <div class="mt-element-gap flex flex-wrap gap-3">
+      {
+        project.technologies.map((tech) => (
+          <span class="rounded border border-outline-variant px-4 py-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:border-tertiary hover:text-tertiary">
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ─── Prev / Next proyecto ─────────────────────────────── -->
+  <section class="mt-section-gap border-t border-outline-variant pt-16">
+    <div class="flex items-stretch justify-between gap-gutter">
+      {
+        prev ? (
+          <a
+            href={`/projects/${prev.slug}`}
+            class="group max-w-[50%] rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary"
+          >
+            <span class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+              Anterior
+            </span>
+            <span class="font-body-lg text-body-lg font-semibold text-on-surface">{prev.title}</span>
+          </a>
+        ) : (
+          <span class="hidden" />
+        )
+      }
+      {
+        next ? (
+          <a
+            href={`/projects/${next.slug}`}
+            class="group ml-auto max-w-[50%] rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary"
+          >
+            <span class="mb-2 flex items-center justify-end gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
+              Siguiente
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+            </span>
+            <span class="font-body-lg text-body-lg font-semibold text-on-surface">{next.title}</span>
+          </a>
+        ) : (
+          <span class="hidden" />
+        )
+      }
+    </div>
+  </section>
+</main>

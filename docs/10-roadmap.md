@@ -30,11 +30,12 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear `ProjectCard.astro` (versión compacta, para Featured Work del Home)
 - [x] Crear listado destacado en Home (Featured Work, 2 cards)
 - [x] Crear página `/projects` con grid asimétrico (masonry `wide`/`tall`) + filtros
-- [ ] Crear página individual (`ProjectDetail` layout reutilizable)
+- [x] Crear página individual (`ProjectDetail` layout reutilizable)
 - [ ] Cargar contenido real de GurkCRM
-- [ ] Cargar contenido real de ForgeStudio
-- [ ] Cargar contenido real de Book-Bites
 - [ ] Cargar contenido real de 007-Sama
+- [ ] Cargar contenido real de ForgeStudio
+- [ ] Cargar contenido real de Consolink
+- [ ] Cargar contenido real de Kaido
 
 ## Fase 4 — Audiovisual
 

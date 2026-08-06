@@ -4,7 +4,7 @@
 // `featured: true` = aparece en "Featured Work" del Home (03-secciones-home.md §4).
 // `featured: false` = solo en la página /projects.
 // `layout` controla el masonry en /projects (04-proyectos.md).
-// Proyectos reales: 007 Sama, Consolink, ForgeStudio, GurkCRM, Kaido.
+// Proyectos reales: 007-Sama, Consolink, ForgeStudio, GurkCRM, Kaido.
 
 export interface Project {
   title: string;
@@ -19,6 +19,17 @@ export interface Project {
   layout: "wide" | "tall";
   category: "web" | "desktop" | "mobile" | "backend" | "database" | "other";
   year?: number; // badge de año en Featured Work
+  // Subsecciones de la página detalle (ProjectLayout, ver 04-proyectos.md).
+  // Campos opcionales: el layout renderiza solo los presentes. El contenido
+  // real se carga proyecto por proyecto (tarea separada del roadmap).
+  goal?: string; // Objetivo
+  problem?: string; // Problema
+  solution?: string; // Solución
+  architecture?: string; // Arquitectura (se renderiza como bloque code-block-border)
+  features?: string[]; // Funcionalidades (lista ">")
+  challenges?: string[]; // Desafíos
+  learnings?: string[]; // Aprendizajes
+  screenshots?: string[]; // Galería de imágenes de la página detalle
 }
 
 export const projects: Project[] = [
@@ -56,7 +67,7 @@ export const projects: Project[] = [
     description:
       "E-commerce de videojuegos completo: catálogo, búsqueda, autenticación, wishlist, noticias y checkout con Stripe.",
     technologies: ["Astro", "React", "TypeScript", "Stripe", "Redis"],
-    image: "/assets/Projects/007 Sama/Inicio.PNG",
+    image: "/assets/Projects/007-Sama/Inicio.PNG",
     featured: false,
     layout: "wide",
     category: "web",
