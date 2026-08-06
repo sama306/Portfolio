@@ -15,18 +15,18 @@ export interface ExperienceItem {
 
 export const experience: ExperienceItem[] = [
   {
-    period: "2025 — Actualidad",
+    period: "2026 — Actualidad",
     title: "Desarrollo de proyectos personales",
     description:
-      "Sigo desarrollando proyectos propios mientras me formo, aplicando lo aprendido y explorando nuevas herramientas.",
+      " Desarrollo software con React, TypeScript, Astro 6, TailwindCSS, C, Python, SQL Server, HTML, CSS y PostgreSQL. Interesado en aplicar tecnologías modernas para resolver problemas reales y en el aprendizaje continuo.",
     type: "experiencia",
   },
   {
-    period: "2025",
+    period: "Mayo 2024 — Febrero 2026",
     title: "Editor de Video",
     organization: "Inmobiliaria",
     description:
-      "Edición y preparación del material audiovisual de propiedades para su publicación en redes sociales.",
+      "Edición y postproducción de contenido audiovisual para redes sociales y presentaciones institucionales.",
     type: "experiencia",
     linkToVideos: true,
     details: [
@@ -41,7 +41,7 @@ export const experience: ExperienceItem[] = [
   {
     period: "En curso",
     title: "Tecnicatura en Programación Informática",
-    organization: "[Nombre de la institución]",
+    organization: "Universidad Nacional de San Martin",
     description: "Formación técnica en desarrollo de software.",
     type: "educacion",
   },

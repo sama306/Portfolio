@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# large media (videos hosted on YouTube, not in repo)
+public/assets/Videos/*.mp4
+
 # jetbrains setting folder
 .idea/
