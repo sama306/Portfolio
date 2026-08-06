@@ -120,15 +120,77 @@ Order: routes → controller → service → repository → Prisma`,
   {
     title: "ForgeStudio",
     slug: "forgestudio",
-    subtitle: "Digital Identity",
+    subtitle: "Estudio de Diseño / Branding",
     description:
-      "Web moderna enfocada en presentar servicios y soluciones digitales, con decisiones de diseño como sección propia.",
-    technologies: ["Astro", "TypeScript", "Tailwind", "GSAP"],
+      "Landing premium para un estudio creativo ficticio de diseño, desarrollo web y branding, con animaciones GSAP, dark/light mode y case studies dinámicos.",
+    technologies: [
+      "Astro",
+      "TypeScript",
+      "Tailwind",
+      "GSAP",
+      "ScrollTrigger",
+      "Lenis",
+      "Astro Icon",
+      "Zod",
+    ],
     image: "/assets/Projects/Forge-Studio/Inicio.PNG",
+    github: "https://github.com/sama306/ForgeStudio",
+    demo: "https://forge-studio12.vercel.app",
     featured: true,
     layout: "tall",
     category: "web",
     year: 2026,
+    goal: "Simular un producto digital real de nivel profesional —un estudio creativo ficticio llamado Forge Studio— demostrando dominio de Astro, Tailwind CSS, animaciones avanzadas, accesibilidad y optimización, como carta de presentación para entrevistas y clientes.",
+    problem:
+      "Demostrar que se puede construir un sitio multi-página premium de una marca completa —con contenido modelado en case studies, dark/light mode y animaciones sofisticadas— y no quedarse en una one-page estática sin profundidad.",
+    solution:
+      "Landing premium de Forge Studio + páginas secundarias (Work, Services, About, Contact) + 4 case studies dinámicos con rutas /work/[slug]. Animaciones GSAP + ScrollTrigger con Lenis como fuente del scroll, dark/light mode persistente sin flash, formulario de contacto a Formspree con validación client-side, y SEO completo.",
+    architecture: `src/
+├── assets/
+├── components/    # Hero, Clients, Services, Process, Projects,
+│                  # Stats, Testimonials, CTA, Navbar, Footer, ProjectCard
+├── layouts/       # Layout.astro (SEO, fuentes, Lenis, grain overlay)
+├── pages/         # index, work, work/[slug], services, about,
+│                  # contact, terms, privacy
+├── styles/        # global.css (paleta, tipografía, tokens)
+├── content/
+│   └── projects/  # atlas, lunar, nova, pulse (MD)
+└── utils/         # lenis.ts, textReveal.ts, services.ts`,
+    features: [
+      "Landing completa: Hero, Clients (carrusel infinito), Services, Process, Projects, Stats, Testimonials y CTA",
+      "Páginas adicionales: Work (listado), Services, About y Contact, cada una con animaciones y diseño propio",
+      "4 case studies con rutas dinámicas (/work/[slug]) a partir de content collections",
+      "Dark/Light mode con persistencia en localStorage y toggle en navbar sin flash",
+      "Animaciones GSAP + ScrollTrigger en Hero, Stats, Projects, Process y Contact, con utilidad textReveal",
+      "Scroll suave con Lenis sincronizado con ScrollTrigger",
+      "Formulario de contacto con validación client-side y envío a Formspree",
+      "Páginas legales: Términos y Privacidad",
+      "SEO: Open Graph, Twitter Cards, sitemap.xml, robots.txt y URLs semánticas",
+      "Accesibilidad: ARIA, foco visible, navegación por teclado y prefers-reduced-motion",
+      "Responsive mobile-first con menú hamburguesa y overlay animado",
+      "Performance: fuentes con swap, Lenis diferido y animaciones con transform/opacity",
+    ],
+    challenges: [
+      "Sincronizar Lenis como fuente única del scroll con el ScrollTrigger de GSAP sin conflictos",
+      "Implementar dark/light mode persistente sin flash de color al recargar (script inline)",
+      "Mantener animaciones fluidas usando solo transform y opacity para no degradar el rendimiento",
+      "Validar el contenido de los case studies con Zod en las content collections",
+    ],
+    learnings: [
+      "Especificar animaciones por elemento en un documento de diseño (docs/animations.md) ordena la implementación",
+      "Una utilidad textReveal reutilizable evita repetir lógica de animación entre secciones",
+      "Lenis como fuente única del scroll evita los conflictos típicos de scroll suave con librerías de animación",
+      "Una landing multi-página con content collections escala mejor que una one-page hardcodeada",
+    ],
+    screenshots: [
+      "/assets/Projects/Forge-Studio/Inicio.PNG",
+      "/assets/Projects/Forge-Studio/Servicios.PNG",
+      "/assets/Projects/Forge-Studio/Proceso.PNG",
+      "/assets/Projects/Forge-Studio/Proyectos.PNG",
+      "/assets/Projects/Forge-Studio/Trabajos.PNG",
+      "/assets/Projects/Forge-Studio/Nosotros.PNG",
+      "/assets/Projects/Forge-Studio/Contacto.PNG",
+    ],
   },
   {
     title: "007 Sama",
