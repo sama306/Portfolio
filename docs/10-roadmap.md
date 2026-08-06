@@ -31,7 +31,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear listado destacado en Home (Featured Work, 2 cards)
 - [x] Crear página `/projects` con grid asimétrico (masonry `wide`/`tall`) + filtros
 - [x] Crear página individual (`ProjectDetail` layout reutilizable)
-- [ ] Cargar contenido real de GurkCRM
+- [x] Cargar contenido real de GurkCRM
 - [ ] Cargar contenido real de 007-Sama
 - [ ] Cargar contenido real de ForgeStudio
 - [ ] Cargar contenido real de Consolink
