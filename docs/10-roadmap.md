@@ -26,9 +26,9 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 
 ## Fase 3 — Proyectos
 
-- [ ] Crear `src/data/projects.ts` (con campos `featured`, `layout`, `year`)
-- [ ] Crear `ProjectCard.astro` (versión compacta, para Featured Work del Home)
-- [ ] Crear listado destacado en Home (Featured Work, 2 cards)
+- [x] Crear `src/data/projects.ts` (con campos `featured`, `layout`, `year`)
+- [x] Crear `ProjectCard.astro` (versión compacta, para Featured Work del Home)
+- [x] Crear listado destacado en Home (Featured Work, 2 cards)
 - [ ] Crear página `/projects` con grid asimétrico (masonry `wide`/`tall`) + filtros
 - [ ] Crear página individual (`ProjectDetail` layout reutilizable)
 - [ ] Cargar contenido real de GurkCRM
