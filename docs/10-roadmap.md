@@ -35,7 +35,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Cargar contenido real de 007-Sama
 - [x] Cargar contenido real de ForgeStudio
 - [x] Cargar contenido real de Consolink
-- [ ] Cargar contenido real de Kaido
+- [x] Cargar contenido real de Kaido
 
 ## Fase 4 — Audiovisual
 

@@ -367,14 +367,71 @@ Roles: many-to-many (UserRole) + requireRole()`,
   {
     title: "Kaido",
     slug: "kaido",
-    subtitle: "Restaurant Web",
+    subtitle: "Cafetería de Especialidad",
     description:
-      "Landing page premium para una cafetería de especialidad de inspiración japonesa: menú, especialidades, galería y ubicación.",
-    technologies: ["Astro", "React", "TypeScript", "GSAP", "Framer Motion"],
+      "Landing page premium para transmitir la experiencia de una cafetería de especialidad de inspiración japonesa: minimalismo cálido, ritmo lento y detalle en cada interacción.",
+    technologies: ["Astro", "React", "TypeScript", "Tailwind", "GSAP", "Framer Motion"],
     image: "/assets/Projects/Kaido/Inicio.PNG",
+    github: "https://github.com/sama306/Kaido",
+    portfolioNote:
+      "Propuesta comercial de diseño sobre una cafetería ficticia, no el sitio oficial de ningún negocio: no usa logos oficiales, las fotografías provienen de bancos de imágenes de uso libre (Pexels/Unsplash) y el contenido (menú, eventos, dirección) es de ejemplo. También sirve como plantilla reutilizable.",
     featured: false,
     layout: "wide",
     category: "web",
     year: 2026,
+    goal: "Diseñar una landing premium que transmita una experiencia sensorial —una cafetería de especialidad de inspiración japonesa, con ritmo lento y atención al detalle— y que funcione tanto como propuesta comercial de diseño como plantilla reutilizable para futuras cafeterías.",
+    problem:
+      "Los sitios de cafeterías suelen ser genéricos y centrados en listar información. Acá se busca transmitir una identidad cálida y pausada a través del diseño y la interacción, convirtiendo la navegación en parte de la experiencia de la marca.",
+    solution:
+      "Landing Astro con islas de React y animaciones GSAP (scroll-trigger, timelines) más Framer Motion para micro-interacciones. Contenido centralizado en src/data/, loader animado que respeta autoplay, menú interactivo filtrable sin PDF, galería en collage con visor fullscreen y ubicación con mapa embebido e ilustración propia.",
+    architecture: `src/
+├── components/
+│   ├── astro/         # componentes estáticos (.astro)
+│   └── react/         # islas interactivas de React
+├── layouts/
+├── pages/
+├── styles/
+│   ├── global.css
+│   └── tokens.css     # design tokens: colores, tipografía, spacing
+├── data/              # contenido: menú, especialidades, eventos, ubicación
+└── assets/images/
+
+Sistema de diseño:
+  verde oscuro #1F5C52 · bordó vino #6A1D2A
+  fondo crema #F6F2EC · dorado (decorativo)
+  Cormorant Garamond (títulos) + Inter (contenido)`,
+    features: [
+      "Loader inicial animado: secuencia de taza, líquido y vapor transformándose en isotipo, con audio opcional",
+      "Hero con parallax suave a pantalla completa",
+      "Menú interactivo filtrable por categoría (Café, Pastelería, Brunch, Especiales) sin PDF",
+      "Galería en collage con visor fullscreen (sin carrusel)",
+      "Especialidades con cards de revelado progresivo por scroll",
+      "Sección de eventos filtrable con próximas fechas y talleres",
+      "Ubicación con mapa embebido e ilustración propia del frente del local",
+      "Menú mobile a pantalla completa con cierre por click afuera, Escape o navegación",
+      "Elementos decorativos de línea fina (motivo camino/rama) en línea con el significado de kaido",
+      "Diseño responsive con atención especial a mobile",
+      "SEO completo: meta tags, Open Graph, Twitter Card, sitemap y robots.txt",
+    ],
+    challenges: [
+      "Cronometrar un loader animado (taza → isotipo) que respete las políticas de autoplay del navegador para el audio",
+      "Diseñar una galería en collage con visor fullscreen en vez de un carrusel convencional",
+      "Coordinar GSAP (scroll-trigger, timelines) con Framer Motion sin conflictos entre librerías",
+      "Garantizar el cierre del menú mobile por múltiples vías sin perder el foco",
+    ],
+    learnings: [
+      "Definir la identidad visual completa en tokens.css (color, tipografía, spacing) antes que el layout ordena todo el diseño",
+      "La animación puede ser parte del contenido: un loader narrativo construye la marca desde el primer segundo",
+      "Usar bancos de imágenes libres permite armar una propuesta de diseño premium sin fotografías reales del local",
+    ],
+    screenshots: [
+      "/assets/Projects/Kaido/Inicio.PNG",
+      "/assets/Projects/Kaido/Menu.PNG",
+      "/assets/Projects/Kaido/Especialidades.PNG",
+      "/assets/Projects/Kaido/Galeeria.PNG",
+      "/assets/Projects/Kaido/Ig.PNG",
+      "/assets/Projects/Kaido/Sig.PNG",
+      "/assets/Projects/Kaido/Ubicacion.PNG",
+    ],
   },
 ];
