@@ -108,6 +108,7 @@ Order: routes → controller → service → repository → Prisma`,
       "Estrategia MVP vs fase 2 permite completar un portfolio profesional en un tiempo razonable",
     ],
     screenshots: [
+      "/assets/Projects/Gurk/Inicio.PNG",
       "/assets/Projects/Gurk/Dashboard.PNG",
       "/assets/Projects/Gurk/Oportunidadeds.PNG",
       "/assets/Projects/Gurk/Clientes.png",
@@ -132,15 +133,84 @@ Order: routes → controller → service → repository → Prisma`,
   {
     title: "007 Sama",
     slug: "007-sama",
-    subtitle: "Interactive Gaming Experience",
+    subtitle: "E-commerce de Videojuegos",
     description:
-      "E-commerce de videojuegos completo: catálogo, búsqueda, autenticación, wishlist, noticias y checkout con Stripe.",
-    technologies: ["Astro", "React", "TypeScript", "Stripe", "Redis"],
+      "Tienda de videojuegos static-first con islas de hidratación: catálogo, búsqueda fuzzy, autenticación OAuth, wishlist y checkout, pensada para rendimiento y escalabilidad.",
+    technologies: [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "Nano Stores",
+      "Auth.js",
+      "Upstash Redis",
+      "Zod",
+      "Fuse.js",
+      "jsPDF",
+      "Resend",
+      "Vitest",
+      "Playwright",
+    ],
     image: "/assets/Projects/007-Sama/Inicio.PNG",
+    github: "https://github.com/sama306/007-Sama",
+    demo: "https://007-sama.vercel.app",
     featured: false,
     layout: "wide",
     category: "web",
     year: 2026,
+    goal: "Demostrar que una tienda de videojuegos puede ofrecer interactividad donde importa —carrito, búsqueda, login y wishlist— sin sacrificar Core Web Vitals en favor de un SPA pesado.",
+    problem:
+      "La mayoría de los e-commerces del sector dependen de SPAs pesados que sacrifican rendimiento y Core Web Vitals en favor de una interactividad total, incluso en zonas donde el usuario no la percibe.",
+    solution:
+      "Arquitectura Astro static-first con islands de hidratación parcial (client:load / client:visible), Nano Stores para el estado de cliente, Auth.js con OAuth (Google, Discord, Steam), Upstash Redis para sesiones y wishlist, y una estrategia híbrida SSG/SSR: estático donde se puede, server rendering solo donde hace falta autenticación.",
+    architecture: `src/
+├── content/          # Content Collections (.md)
+│   ├── config.ts     # schema con Zod
+│   ├── games/        # un archivo por juego
+│   └── news/         # noticias
+├── components/       # ui, game, cart, auth, layout
+├── layouts/          # BaseLayout, GameLayout, AdminLayout
+├── pages/            # file-based routing
+├── lib/              # kv, auth, users, search, cart, format
+├── stores/           # Nano Stores (cart, auth, wishlist, UI)
+├── db/               # schema, queries, seed
+└── styles/
+
+Ruteo: SSG (/, games, news, cart, search)
+     SSR + auth (/account/*, /checkout)`,
+    features: [
+      "Catálogo con Content Collections y frontmatter validado con Zod",
+      "Filtros por género, plataforma, precio y rating",
+      "Búsqueda client-side con Fuse.js (fuzzy search)",
+      "Página de detalle con galería, requisitos, trailer y valoraciones",
+      "Nuevos lanzamientos: últimos 30 días y próximos",
+      "Módulo de noticias: releases, updates, reviews y eventos",
+      "Autenticación: registro por email y login con OAuth (Google, Discord, Steam)",
+      "Recuperación de contraseña con email transaccional (Resend)",
+      "Carrito de compras sincronizado con API y persistente en sesión",
+      "Wishlist sincronizada entre dispositivos vía Redis con localStorage como fallback",
+      "Checkout SSR con confirmación y comprobante PDF (jsPDF)",
+      "Panel de usuario: pedidos, wishlist y perfil",
+      "SEO: sitemap, structured data, Open Graph y meta tags",
+      "Tests unitarios (Vitest) + e2e (Playwright) y CI/CD a Vercel",
+    ],
+    challenges: [
+      "Diferenciar rutas SSG de rutas SSR, subiendo auth solo donde se necesita",
+      "Sincronizar carrito y wishlist entre Redis y localStorage sin perder estado",
+      "Compartir esquemas de Zod entre la API, los formularios y las Content Collections",
+    ],
+    learnings: [
+      "La arquitectura de islands permite equilibrar rendimiento e interactividad sin elegir uno solo",
+      "Nano Stores es una alternativa ligera (~1 KB) y reactiva a soluciones de estado más pesadas",
+      "El fuzzy search client-side evita servicios externos y reduce dependencias",
+    ],
+    screenshots: [
+      "/assets/Projects/007-Sama/Inicio.PNG",
+      "/assets/Projects/007-Sama/Nuevos-Lanzamientos.PNG",
+      "/assets/Projects/007-Sama/Catalogo.PNG",
+      "/assets/Projects/007-Sama/Buscar.PNG",
+      "/assets/Projects/007-Sama/Noticias.PNG",
+    ],
   },
   {
     title: "Consolink",

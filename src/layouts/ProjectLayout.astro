@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/projects';
+import ProjectGallery from '../components/ProjectGallery.tsx';
 
 interface Props {
   project: Project;
@@ -144,20 +145,8 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Imágenes
     </h2>
-    <div class="mt-element-gap grid grid-cols-1 gap-gutter md:grid-cols-2">
-      {
-        screenshots.map((src, index) => (
-          <div class="group overflow-hidden rounded-lg border border-outline-variant bg-surface-container transition-colors duration-300 hover:border-tertiary">
-            <img
-              class="h-full w-full object-cover object-top filter grayscale transition-all duration-700 group-hover:grayscale-0"
-              src={src}
-              alt={`Vista ${index + 1} de ${project.title}`}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ))
-      }
+    <div class="mt-element-gap">
+      <ProjectGallery client:load images={screenshots} alt={project.title} />
     </div>
   </section>
 
