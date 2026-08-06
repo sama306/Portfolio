@@ -29,7 +29,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear `src/data/projects.ts` (con campos `featured`, `layout`, `year`)
 - [x] Crear `ProjectCard.astro` (versión compacta, para Featured Work del Home)
 - [x] Crear listado destacado en Home (Featured Work, 2 cards)
-- [ ] Crear página `/projects` con grid asimétrico (masonry `wide`/`tall`) + filtros
+- [x] Crear página `/projects` con grid asimétrico (masonry `wide`/`tall`) + filtros
 - [ ] Crear página individual (`ProjectDetail` layout reutilizable)
 - [ ] Cargar contenido real de GurkCRM
 - [ ] Cargar contenido real de ForgeStudio

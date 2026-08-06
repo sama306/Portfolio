@@ -1,0 +1,54 @@
+---
+import { projects } from '../data/projects';
+
+const CONTACT_EMAIL = 'valensamacoits1@gmail.com';
+const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=Hola%20Dante`;
+
+const projectCount = projects.length;
+const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server', 'Python'];
+---
+
+<!--
+  Technical Explorations — sección de cierre de /projects (ver projects-reference.html).
+  Bloque "algoritmo/sistema" (variante A: pseudo-código) que presenta la info de Dante.
+  `contactar("Hola Dante")` es un link real a mailto (estilo función en español, no `invoke:`).
+  Contenedor: code-block-border de global.css (borde izquierdo 4px tertiary).
+-->
+
+<section class="mx-auto w-full max-w-[1200px] px-gutter pt-section-gap">
+  <div class="border-t border-outline-variant pt-16">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Exploraciones técnicas</h2>
+
+    <div class="mt-element-gap grid grid-cols-1 gap-gutter md:grid-cols-2">
+      <!-- Columna de bloque -->
+      <div class="code-block-border overflow-hidden self-start rounded bg-surface-container">
+        <div class="flex items-center justify-between border-b border-outline-variant px-5 py-3">
+          <span class="font-label-caps text-label-caps text-on-surface-variant">dante.py</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[18px]" aria-hidden="true"
+            >terminal</span
+          >
+        </div>
+        <pre class="overflow-x-auto px-5 py-4 font-mono-code text-mono-code text-on-surface-variant"><code><span class="text-outline">def</span> <span class="text-tertiary">dante</span>():
+    rol <span class="text-outline">=</span> <span class="text-on-surface">"Software Developer"</span>
+    estudio <span class="text-outline">=</span> <span class="text-on-surface">"Tecnicatura en Programación Informática — UNSAM"</span>
+    experiencia <span class="text-outline">=</span> [<span class="text-on-surface">"Software"</span>, <span class="text-on-surface">"Edición audiovisual"</span>]
+    stack <span class="text-outline">=</span> [{STACK.map((tech) => `"${tech}"`).join(', ')}]
+    proyectos <span class="text-outline">=</span> {projectCount}
+
+    resultado <span class="text-outline">=</span> <span class="text-on-surface">"código + estética"</span>
+
+    <span class="text-outline">if</span> tenés_un_proyecto:
+        <span class="text-outline">return</span> <a class="text-tertiary underline decoration-tertiary/40 underline-offset-4 transition-colors duration-300 hover:decoration-tertiary" href={mailtoHref}>contactar("Hola Dante")</a></code></pre>
+      </div>
+
+      <!-- Columna de texto -->
+      <div class="flex flex-col justify-center">
+        <p class="font-body-lg text-body-lg text-on-surface-variant">
+          Más allá de las aplicaciones completas, dedico tiempo a experimentar con arquitecturas y
+          patrones de diseño. Estas exploraciones forman la base de los sistemas que construyo y
+          aseguran que el detalle técnico y el cuidado estético trabajen en conjunto.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
