@@ -15,6 +15,7 @@ export interface Project {
   image: string;
   github?: string;
   demo?: string;
+  portfolioNote?: string; // nota de honestidad: proyecto de portfolio/demo, no un producto en producción
   featured: boolean;
   layout: "wide" | "tall";
   category: "web" | "desktop" | "mobile" | "backend" | "database" | "other";
@@ -58,6 +59,8 @@ export const projects: Project[] = [
     image: "/assets/Projects/Gurk/Inicio.PNG",
     github: "https://github.com/sama306/GurkCRM",
     demo: "https://gurk-crm.vercel.app",
+    portfolioNote:
+      "Proyecto de portfolio construido de cero: una demo funcional con datos de prueba, no un producto SaaS real en uso. El backend corre en un plan gratuito que se duerme tras inactividad.",
     featured: true,
     layout: "wide",
     category: "web",
@@ -136,6 +139,8 @@ Order: routes → controller → service → repository → Prisma`,
     image: "/assets/Projects/Forge-Studio/Inicio.PNG",
     github: "https://github.com/sama306/ForgeStudio",
     demo: "https://forge-studio12.vercel.app",
+    portfolioNote:
+      "Proyecto de portfolio basado en una marca ficticia (Forge Studio). La demo en línea es estática, sin backend, formularios dirigidos a Formspree ni datos reales: es una presentación, no un sitio en producción para clientes.",
     featured: true,
     layout: "tall",
     category: "web",
@@ -216,6 +221,8 @@ Order: routes → controller → service → repository → Prisma`,
     image: "/assets/Projects/007-Sama/Inicio.PNG",
     github: "https://github.com/sama306/007-Sama",
     demo: "https://007-sama.vercel.app",
+    portfolioNote:
+      "Proyecto de portfolio con una demo funcional: sin pagos reales ni datos sensibles; el checkout y las vistas autenticadas usan entorno de prueba. Corresponde a un demo, no a una tienda de videojuegos en producción.",
     featured: false,
     layout: "wide",
     category: "web",
@@ -277,15 +284,85 @@ Ruteo: SSG (/, games, news, cart, search)
   {
     title: "Consolink",
     slug: "consolink",
-    subtitle: "Facility Management",
+    subtitle: "Gestión de Consorcios",
     description:
-      "Plataforma de gestión para consorcios con paneles por rol (admin, manager, owner, tenant) y administración de edificios y departamentos.",
-    technologies: ["Astro", "React", "TypeScript", "TanStack Query", "Zod"],
+      "Plataforma centralizada para administrar consorcios, edificios, departamentos, expensas y tickets de reparación, con roles y permisos diferenciados (admin, manager, owner, tenant).",
+    technologies: [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "shadcn/ui",
+      "Radix UI",
+      "TanStack Query",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+      "Express",
+      "PostgreSQL",
+      "Prisma",
+      "JWT",
+    ],
     image: "/assets/Projects/Consolink/login.jpeg",
+    github: "https://github.com/sama306/consolink",
+    portfolioNote:
+      "Proyecto de práctica personal (full stack) para ejercitar roles, autenticación y modelado relacional. Este repositorio contiene únicamente el frontend; el backend no está publicado, por lo que no es funcional ni relevable standalone ni está en producción.",
     featured: false,
     layout: "wide",
     category: "web",
     year: 2026,
+    goal: "Ejercitar el desarrollo full-stack en un escenario con múltiples roles, autenticación, autorización y una base de datos relacional con relaciones complejas, aplicado a la gestión integral de consorcios.",
+    problem:
+      "Administrar consorcios involucra roles muy distintos —administración, encargados, propietarios e inquilinos— con permisos y vistas propias, más datos relacionales complejos (consorcio → edificio → departamento → inquilino, expensas, tickets y avisos) difíciles de organizar sin una plataforma centralizada.",
+    solution:
+      "Frontend Astro SSR con islas de React 19 y paneles por rol, consumiendo una API REST no incluida en el repo (Node + Express + PostgreSQL + Prisma). Autenticación mediante JWT en cookie httpOnly, roles many-to-many para usuarios con varios roles y paneles diferenciados por tipo de usuario.",
+    architecture: `Cliente (Astro SSR, puerto 4321)
+  │  fetch (cookie auth_token)
+  ▼
+Servidor (Express API, puerto 3001)
+  │  Prisma ORM
+  ▼
+PostgreSQL
+
+Auth: cookie httpOnly → GET /api/auth/me
+      → middleware Astro adjunta user a locals
+Roles: many-to-many (UserRole) + requireRole()`,
+    features: [
+      "Panel ADMIN: CRUD de consorcios, edificios, departamentos, propietarios, inquilinos y encargados",
+      "ADMIN: CRUD de usuarios con asignación de roles many-to-many",
+      "Gestión masiva de expensas: generación por consorcio y estados de pago",
+      "Gestión de tickets con asignación a encargado y cambio de estado",
+      "Avisos con targeting por consorcio/edificio y calendario de eventos",
+      "Gestión de documentos y tablero de tareas pendientes/resueltas",
+      "Panel OWNER: mis propiedades, tickets de reparación y expensas",
+      "Panel TENANT: unidad asignada, contrato con cuenta regresiva de días y expensas",
+      "Panel MANAGER: tickets asignados/cerrados con cambio de estado y tareas",
+      "Dashboard ADMIN con estadísticas y tema claro/oscuro",
+    ],
+    challenges: [
+      "Coordinar el fetching SSR (middleware de auth, stats) con la carga asíncrona del lado cliente (TanStack Query en las islas)",
+      "Mantener consistencia entre la tabla UserRole y las tablas de perfil (Owner, Tenant, Manager) al crear usuarios sin asumir un único rol",
+      "Implementar auth con cookie httpOnly y SSR: el middleware debe leer la cookie, consultar el backend y adjuntar el usuario antes de renderizar",
+      "Diseñar un sistema de permisos por rol con requireRole() que verifique conjuntos de roles, no uno fijo",
+      "Formularios con dependency selects (consorcio → edificio → departamento) dentro de modales sin cerrarlos al elegir",
+    ],
+    learnings: [
+      "SSR con Astro + islas de React requiere cuidar el aislamiento de providers por página (QueryProvider por isla raíz)",
+      "La auth JWT en cookie httpOnly mantiene el token fuera del alcance del JavaScript del cliente",
+      "Los roles many-to-many permiten usuarios con varios roles y una navegación por sidebar combinada, sin if/else excluyentes",
+      "Separar backend y frontend (aunque no se publique el backend) facilita probar roles, permisos y modelo de datos complejo",
+    ],
+    screenshots: [
+      "/assets/Projects/Consolink/login.jpeg",
+      "/assets/Projects/Consolink/dashboard-admin.jpeg",
+      "/assets/Projects/Consolink/consorcios.jpeg",
+      "/assets/Projects/Consolink/edificios.jpeg",
+      "/assets/Projects/Consolink/departamentos.jpeg",
+      "/assets/Projects/Consolink/dashboard-owner.jpeg",
+      "/assets/Projects/Consolink/dashboard-tenant.jpeg",
+      "/assets/Projects/Consolink/dashboard-manager.jpeg",
+      "/assets/Projects/Consolink/theme-light.jpeg",
+    ],
   },
   {
     title: "Kaido",

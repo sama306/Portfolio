@@ -33,8 +33,8 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear página individual (`ProjectDetail` layout reutilizable)
 - [x] Cargar contenido real de GurkCRM
 - [x] Cargar contenido real de 007-Sama
-- [ ] Cargar contenido real de ForgeStudio
-- [ ] Cargar contenido real de Consolink
+- [x] Cargar contenido real de ForgeStudio
+- [x] Cargar contenido real de Consolink
 - [ ] Cargar contenido real de Kaido
 
 ## Fase 4 — Audiovisual

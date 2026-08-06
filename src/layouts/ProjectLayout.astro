@@ -98,6 +98,19 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
     </div>
   </header>
 
+  <!-- ─── Nota de portfolio (honestidad sobre demo/estado) ──── -->
+  {
+    project.portfolioNote && (
+      <aside class="mt-section-gap rounded-lg border border-tertiary/30 bg-tertiary/10 p-6">
+        <p class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-tertiary">
+          <span class="material-symbols-outlined text-[16px]" aria-hidden="true">info</span>
+          Proyecto de portfolio
+        </p>
+        <p class="font-body-md text-body-md text-on-surface">{project.portfolioNote}</p>
+      </aside>
+    )
+  }
+
   <!-- ─── Información (solo subsecciones presentes) ─────────── -->
   {
     sections.length > 0 && (
