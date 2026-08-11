@@ -43,7 +43,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear `VideoCard.astro` (con efecto grayscale→color + play icon en hover)
 - [x] Crear preview "Cinematic Editing" en Home (3 cards)
 - [x] Crear página `/videos` con hero + "The Process" + "The Toolkit" + grid + filtros
-- [ ] Crear página individual de video
+- [x] Crear página individual de video
 - [ ] Cargar videos reales de la experiencia en la inmobiliaria
 - [ ] Optimizar thumbnails
 - [ ] Optimizar videos (compresión)

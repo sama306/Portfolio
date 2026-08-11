@@ -1,0 +1,197 @@
+---
+import type { VideoWork } from '../data/videos';
+
+interface Props {
+  video: VideoWork;
+  prev?: VideoWork | null;
+  next?: VideoWork | null;
+}
+
+const { video, prev, next } = Astro.props;
+
+// Proceso genérico por defecto cuando el video no define uno propio.
+const DEFAULT_VIDEO_PROCESS = [
+  'Selección del material',
+  'Organización de tomas',
+  'Edición',
+  'Música y transiciones',
+  'Corrección final',
+  'Exportación',
+];
+
+// "Tipo de trabajo" (Información) derivado de la categoría, ver 05-audiovisual.md.
+const WORK_TYPE: Record<VideoWork['category'], string> = {
+  inmobiliaria: 'Video inmobiliario',
+  'social-media': 'Edición para redes',
+  edicion: 'Edición de video',
+  otros: 'Otro trabajo audiovisual',
+};
+
+// Proceso: usa el específico del video o cae al genérico.
+const process = video.process ?? DEFAULT_VIDEO_PROCESS;
+const processSteps = process.map((step, i) => `0${i + 1} — ${step}`);
+
+// Convierte la URL de YouTube (watch?v=…) a embed de youtube-nocookie, respetando `&t=` como `start`.
+function toEmbedUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+    const id = parsed.searchParams.get('v');
+    if (!id) return url;
+    const start = parsed.searchParams.get('t');
+    const startParam = start ? `?start=${start.replace(/[^0-9]/g, '')}` : '';
+    return `https://www.youtube-nocookie.com/embed/${id}${startParam}`;
+  } catch {
+    return url;
+  }
+}
+
+const embedUrl = toEmbedUrl(video.youtubeUrl);
+
+/*
+  VideoLayout — página individual de video, layout reutilizable
+  (ver 05-audiovisual.md §"Página individual de video").
+  Título + descripción, reproductor de YouTube integrado como card
+  (borde outline-variant + radius lg), Información (Tipo de trabajo,
+  Rol, Herramientas, Objetivo), Proceso (bloque code-block-border)
+  y Resultado. Navegación prev/next idéntica a ProjectLayout.
+*/
+---
+
+<main class="mx-auto w-full max-w-[1200px] flex-1 px-gutter pb-section-gap pt-32">
+  <!-- ─── Hero ─────────────────────────────────────────────── -->
+  <header>
+    <a
+      href="/videos"
+      class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
+    >
+      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+      Volver a videos
+    </a>
+
+    <h1 class="mt-8 font-headline-md text-headline-md text-on-surface md:text-[40px]">{video.title}</h1>
+    <p class="mt-4 max-w-2xl font-body-lg text-body-lg text-on-surface-variant">{video.description}</p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <span class="rounded border border-tertiary px-2 py-1 font-label-caps text-label-caps text-tertiary">
+        {video.tag}
+      </span>
+      <span class="font-mono-code text-mono-code text-on-surface-variant">{video.duration}</span>
+    </div>
+  </header>
+
+  <!-- ─── Reproductor: YouTube embed integrado como card ───── -->
+  <section class="mt-12">
+    <div class="overflow-hidden rounded-lg border border-outline-variant bg-surface-container">
+      <div class="aspect-video w-full">
+        <iframe
+          class="h-full w-full"
+          src={embedUrl}
+          title={`Video: ${video.title}`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Información ──────────────────────────────────────── -->
+  <section class="mt-section-gap">
+    <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+      Información
+    </h2>
+    <div class="mt-element-gap grid grid-cols-1 gap-gutter md:grid-cols-2">
+      <div class="rounded-lg border border-outline-variant bg-surface-variant p-8">
+        <p class="mb-4 font-label-caps text-label-caps text-on-surface-variant">Tipo de trabajo</p>
+        <p class="font-body-lg text-body-lg text-on-surface">{WORK_TYPE[video.category]}</p>
+      </div>
+
+      <div class="rounded-lg border border-outline-variant bg-surface-variant p-8">
+        <p class="mb-4 font-label-caps text-label-caps text-on-surface-variant">Rol</p>
+        <p class="font-body-lg text-body-lg text-on-surface">{video.role}</p>
+      </div>
+
+      <div class="rounded-lg border border-outline-variant bg-surface-variant p-8">
+        <p class="mb-4 font-label-caps text-label-caps text-on-surface-variant">Herramientas</p>
+        <div class="flex flex-wrap gap-3">
+          {
+            video.software.map((tool) => (
+              <span class="rounded border border-outline-variant px-4 py-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:border-tertiary hover:text-tertiary">
+                {tool}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-outline-variant bg-surface-variant p-8">
+        <p class="mb-4 font-label-caps text-label-caps text-on-surface-variant">Objetivo</p>
+        <p class="font-body-lg text-body-lg text-on-surface">{video.objective}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Proceso (bloque code-block-border, mismo tratamiento que "The Process") ── -->
+  <section class="mt-section-gap">
+    <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+      Proceso
+    </h2>
+    <div class="mt-element-gap">
+      <ul class="code-block-border list-none space-y-2 rounded bg-surface-container p-5">
+        {
+          processSteps.map((step) => (
+            <li class="font-mono-code text-mono-code text-on-surface-variant">&gt; {step}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── Resultado ────────────────────────────────────────── -->
+  <section class="mt-section-gap">
+    <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
+      Resultado
+    </h2>
+    <div class="mt-element-gap">
+      <p class="max-w-2xl font-body-lg text-body-lg text-on-surface">{video.result}</p>
+    </div>
+  </section>
+
+  <!-- ─── Prev / Next video ────────────────────────────────── -->
+  <section class="mt-section-gap border-t border-outline-variant pt-16">
+    <div class="flex items-stretch justify-between gap-gutter">
+      {
+        prev ? (
+          <a
+            href={`/videos/${prev.slug}`}
+            class="group max-w-[50%] rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary"
+          >
+            <span class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+              Anterior
+            </span>
+            <span class="font-body-lg text-body-lg font-semibold text-on-surface">{prev.title}</span>
+          </a>
+        ) : (
+          <span class="hidden" />
+        )
+      }
+      {
+        next ? (
+          <a
+            href={`/videos/${next.slug}`}
+            class="group ml-auto max-w-[50%] rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary"
+          >
+            <span class="mb-2 flex items-center justify-end gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
+              Siguiente
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+            </span>
+            <span class="font-body-lg text-body-lg font-semibold text-on-surface">{next.title}</span>
+          </a>
+        ) : (
+          <span class="hidden" />
+        )
+      }
+    </div>
+  </section>
+</main>

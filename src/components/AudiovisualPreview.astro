@@ -32,7 +32,7 @@ const featured = videos.filter((video) => video.featured);
   <div class="grid grid-cols-1 gap-element-gap md:grid-cols-3">
     {
       featured.map((video) => (
-        <article class="group cursor-pointer">
+        <a href={`/videos/${video.slug}`} class="group block">
           <div class="relative mb-4 aspect-video overflow-hidden rounded-lg border border-outline-variant">
             <img
               class="h-full w-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"
@@ -48,11 +48,13 @@ const featured = videos.filter((video) => video.featured);
               <span class="material-symbols-outlined text-4xl text-tertiary">play_circle</span>
             </div>
           </div>
-          <h3 class="font-body-md text-body-md font-semibold text-on-surface">{video.title}</h3>
+          <h3 class="font-body-md text-body-md font-semibold text-on-surface transition-colors duration-300 group-hover:text-tertiary">
+            {video.title}
+          </h3>
           <p class="mt-1 font-body-md text-body-md text-sm text-on-surface-variant">
             {video.duration} • {video.tag}
           </p>
-        </article>
+        </a>
       ))
     }
   </div>

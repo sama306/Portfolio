@@ -19,7 +19,20 @@ export interface VideoWork {
   category: "inmobiliaria" | "social-media" | "edicion" | "otros";
   location?: string; // contexto real de la propiedad, ej. barrio/ciudad
   featured: boolean;
+  objective?: string; // Objetivo (Información de la página individual, ver 05-audiovisual.md)
+  process?: string[]; // pasos del proceso, bloques ">" (fallback al genérico si no se define)
+  result?: string; // Resultado: explicación breve final
 }
+
+// Proceso genérico por defecto para la página individual (05-audiovisual.md §"Página individual de video").
+const DEFAULT_PROCESS = [
+  "Selección del material",
+  "Organización de tomas",
+  "Edición",
+  "Música y transiciones",
+  "Corrección final",
+  "Exportación",
+];
 
 export const videos: VideoWork[] = [
   {
@@ -36,6 +49,18 @@ export const videos: VideoWork[] = [
     software: ["Premiere Pro"],
     category: "inmobiliaria",
     featured: true,
+    objective:
+      "Presentar la propiedad en su mejor momento de luz —el atardecer— y publicar el recorrido en redes sociales como pieza de difusión.",
+    process: [
+      "Selección del material filmado al atardecer",
+      "Organización de tomas por planta y ambiente",
+      "Edición del recorrido",
+      "Música y transiciones",
+      "Corrección de color",
+      "Exportación para redes",
+    ],
+    result:
+      "Un recorrido corto que destaca la ambientación vespertina de la propiedad, listo para captar atención en el feed.",
   },
   {
     title: "Olazbal",
@@ -51,6 +76,18 @@ export const videos: VideoWork[] = [
     software: ["Premiere Pro"],
     category: "inmobiliaria",
     featured: true,
+    objective:
+      "Mostrar la villa en horas azules con una corrección de color que busca un tono cinematográfico y de alta gama.",
+    process: [
+      "Selección de tomas clave de la villa",
+      "Organización del material por ambientes",
+      "Edición con ritmo pausado",
+      "Música y transiciones",
+      "Corrección de color en horas azules",
+      "Exportación final",
+    ],
+    result:
+      "Una pieza cinematográfica que resalta la escala y el exterior de la villa, pensada para el público de la inmobiliaria.",
   },
   {
     title: "Alvarez Thomas",
@@ -66,5 +103,17 @@ export const videos: VideoWork[] = [
     software: ["Premiere Pro"],
     category: "inmobiliaria",
     featured: true,
+    objective:
+      "Comunicar la distribución y el estilo de las residencias a través de una selección de tomas que guíen la mirada de forma natural.",
+    process: [
+      "Selección de tomas de las residencias",
+      "Organización del material",
+      "Edición y montaje",
+      "Música y transiciones",
+      "Corrección final",
+      "Exportación para redes",
+    ],
+    result:
+      "Un montaje ágil y ordenado de las residencias, listo para difusión en redes con ritmo sostenido de principio a fin.",
   },
 ];
