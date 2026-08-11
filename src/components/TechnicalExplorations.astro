@@ -1,9 +1,6 @@
 ---
 import { projects } from '../data/projects';
 
-const CONTACT_EMAIL = 'valensamacoits1@gmail.com';
-const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=Hola%20Dante`;
-
 const projectCount = projects.length;
 const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server', 'Python'];
 ---
@@ -11,7 +8,7 @@ const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server
 <!--
   Technical Explorations — sección de cierre de /projects (ver projects-reference.html).
   Bloque "algoritmo/sistema" (variante A: pseudo-código) que presenta la info de Dante.
-  `contactar("Hola Dante")` es un link real a mailto (estilo función en español, no `invoke:`).
+  `contactar("Hola Dante")` es un link real a la sección Contacto del Home (estilo función en español, no `invoke:`).
   Contenedor: code-block-border de global.css (borde izquierdo 4px tertiary).
 -->
 
@@ -38,7 +35,7 @@ const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server
     resultado <span class="text-outline">=</span> <span class="text-on-surface">"código + estética"</span>
 
     <span class="text-outline">if</span> tenés_un_proyecto:
-        <span class="text-outline">return</span> <a class="text-tertiary underline decoration-tertiary/40 underline-offset-4 transition-colors duration-300 hover:decoration-tertiary" href={mailtoHref}>contactar("Hola Dante")</a></code></pre>
+        <span class="text-outline">return</span> <a class="text-tertiary underline decoration-tertiary/40 underline-offset-4 transition-colors duration-300 hover:decoration-tertiary" href="/#contacto">contactar("Hola Dante")</a></code></pre>
       </div>
 
       <!-- Columna de texto -->

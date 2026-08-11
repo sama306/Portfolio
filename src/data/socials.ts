@@ -1,6 +1,10 @@
 // Redes sociales / canales de contacto.
-// Renderizado por src/components/Contacto.astro — agregar una red nueva
+// Renderizado por Hero, Footer y Contacto — agregar una red nueva
 // = agregar un objeto acá (y su logo SVG en el componente), sin tocar el layout.
+
+export const CONTACT_EMAIL = 'valensamacoits1@gmail.com';
+export const contactMailtoHref = `mailto:${CONTACT_EMAIL}?subject=Hola%20Dante`;
+export const contactFormEndpoint = 'https://formspree.io/f/xoeadber';
 
 export interface Social {
   name: "LinkedIn" | "Instagram" | "GitHub";
