@@ -50,7 +50,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 
 ## Fase 5 — Animaciones
 
-- [ ] Elegir librería (GSAP o Framer Motion) — ver `07-animaciones.md`
+- [x] Elegir librería (GSAP o Framer Motion) — ver `07-animaciones.md`
 - [ ] Animaciones de entrada por scroll en cada sección
 - [ ] Hover states en cards (borde a cyan + grayscale→color, sin sombras ni scale del contenedor)
 - [ ] Scroll progress bar
