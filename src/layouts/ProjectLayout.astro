@@ -34,8 +34,6 @@ const CATEGORY_LABELS: Record<Project['category'], string> = {
 const sections: { label: string; kind: 'text' | 'code' | 'list'; content: string | string[] }[] = [];
 if (project.description) sections.push({ label: 'Descripción', kind: 'text', content: project.description });
 if (project.goal) sections.push({ label: 'Objetivo', kind: 'text', content: project.goal });
-if (project.problem) sections.push({ label: 'Problema', kind: 'text', content: project.problem });
-if (project.solution) sections.push({ label: 'Solución', kind: 'text', content: project.solution });
 if (project.architecture) sections.push({ label: 'Arquitectura', kind: 'code', content: project.architecture });
 if (project.features && project.features.length > 0)
   sections.push({ label: 'Funcionalidades', kind: 'list', content: project.features });
