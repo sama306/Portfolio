@@ -24,8 +24,6 @@ export interface Project {
   // Campos opcionales: el layout renderiza solo los presentes. El contenido
   // real se carga proyecto por proyecto (tarea separada del roadmap).
   goal?: string; // Objetivo
-  problem?: string; // Problema
-  solution?: string; // Solución
   architecture?: string; // Arquitectura (se renderiza como bloque code-block-border)
   features?: string[]; // Funcionalidades (lista ">")
   challenges?: string[]; // Desafíos
@@ -45,13 +43,6 @@ export const projects: Project[] = [
       "React",
       "TypeScript",
       "Tailwind",
-      "shadcn/ui",
-      "TanStack Query",
-      "Zustand",
-      "React Hook Form",
-      "Zod",
-      "Framer Motion",
-      "dnd-kit",
       "Express",
       "Prisma",
       "SQL Server",
@@ -66,10 +57,6 @@ export const projects: Project[] = [
     category: "web",
     year: 2026,
     goal: "Desarrollar una aplicación SaaS profesional que permita a pequeñas y medianas empresas administrar todo su proceso comercial —clientes, oportunidades, tareas y equipos— desde un único lugar, sirviendo como pieza principal de portfolio para aplicar a posiciones de Frontend / Full Stack Developer.",
-    problem:
-      "Los equipos comerciales de agencias, estudios jurídicos, consultoras y PyMEs suelen manejar clientes, oportunidades y tareas en planillas o herramientas fragmentadas. Además, al tratarse de un SaaS, cada organización necesita aislar sus datos por completo y controlar qué puede ver y hacer cada usuario según su rol.",
-    solution:
-      "Sistema full stack de dos aplicaciones: un frontend Astro + React que consume una API REST, y un backend Express con Clean Architecture por capas. Multi-tenancy real mediante scoping por organizationId, autenticación por JWT con refresh tokens rotativos, roles granulares (Owner, Admin, Sales, Viewer) y validación compartida con Zod entre frontend y backend.",
     architecture: `backend/
 └── src/
     ├── modules/            # Un folder por entidad de negocio
@@ -131,10 +118,6 @@ Order: routes → controller → service → repository → Prisma`,
       "TypeScript",
       "Tailwind",
       "GSAP",
-      "ScrollTrigger",
-      "Lenis",
-      "Astro Icon",
-      "Zod",
     ],
     image: "/assets/Projects/Forge-Studio/Inicio.PNG",
     github: "https://github.com/sama306/ForgeStudio",
@@ -146,10 +129,6 @@ Order: routes → controller → service → repository → Prisma`,
     category: "web",
     year: 2026,
     goal: "Simular un producto digital real de nivel profesional —un estudio creativo ficticio llamado Forge Studio— demostrando dominio de Astro, Tailwind CSS, animaciones avanzadas, accesibilidad y optimización, como carta de presentación para entrevistas y clientes.",
-    problem:
-      "Demostrar que se puede construir un sitio multi-página premium de una marca completa —con contenido modelado en case studies, dark/light mode y animaciones sofisticadas— y no quedarse en una one-page estática sin profundidad.",
-    solution:
-      "Landing premium de Forge Studio + páginas secundarias (Work, Services, About, Contact) + 4 case studies dinámicos con rutas /work/[slug]. Animaciones GSAP + ScrollTrigger con Lenis como fuente del scroll, dark/light mode persistente sin flash, formulario de contacto a Formspree con validación client-side, y SEO completo.",
     architecture: `src/
 ├── assets/
 ├── components/    # Hero, Clients, Services, Process, Projects,
@@ -210,13 +189,7 @@ Order: routes → controller → service → repository → Prisma`,
       "Tailwind",
       "Nano Stores",
       "Auth.js",
-      "Upstash Redis",
-      "Zod",
       "Fuse.js",
-      "jsPDF",
-      "Resend",
-      "Vitest",
-      "Playwright",
     ],
     image: "/assets/Projects/007-Sama/Inicio.PNG",
     github: "https://github.com/sama306/007-Sama",
@@ -228,10 +201,6 @@ Order: routes → controller → service → repository → Prisma`,
     category: "web",
     year: 2026,
     goal: "Demostrar que una tienda de videojuegos puede ofrecer interactividad donde importa —carrito, búsqueda, login y wishlist— sin sacrificar Core Web Vitals en favor de un SPA pesado.",
-    problem:
-      "La mayoría de los e-commerces del sector dependen de SPAs pesados que sacrifican rendimiento y Core Web Vitals en favor de una interactividad total, incluso en zonas donde el usuario no la percibe.",
-    solution:
-      "Arquitectura Astro static-first con islands de hidratación parcial (client:load / client:visible), Nano Stores para el estado de cliente, Auth.js con OAuth (Google, Discord, Steam), Upstash Redis para sesiones y wishlist, y una estrategia híbrida SSG/SSR: estático donde se puede, server rendering solo donde hace falta autenticación.",
     architecture: `src/
 ├── content/          # Content Collections (.md)
 │   ├── config.ts     # schema con Zod
@@ -292,12 +261,6 @@ Ruteo: SSG (/, games, news, cart, search)
       "React",
       "TypeScript",
       "Tailwind",
-      "shadcn/ui",
-      "Radix UI",
-      "TanStack Query",
-      "Zustand",
-      "React Hook Form",
-      "Zod",
       "Express",
       "PostgreSQL",
       "Prisma",
@@ -312,10 +275,6 @@ Ruteo: SSG (/, games, news, cart, search)
     category: "web",
     year: 2026,
     goal: "Ejercitar el desarrollo full-stack en un escenario con múltiples roles, autenticación, autorización y una base de datos relacional con relaciones complejas, aplicado a la gestión integral de consorcios.",
-    problem:
-      "Administrar consorcios involucra roles muy distintos —administración, encargados, propietarios e inquilinos— con permisos y vistas propias, más datos relacionales complejos (consorcio → edificio → departamento → inquilino, expensas, tickets y avisos) difíciles de organizar sin una plataforma centralizada.",
-    solution:
-      "Frontend Astro SSR con islas de React 19 y paneles por rol, consumiendo una API REST no incluida en el repo (Node + Express + PostgreSQL + Prisma). Autenticación mediante JWT en cookie httpOnly, roles many-to-many para usuarios con varios roles y paneles diferenciados por tipo de usuario.",
     architecture: `Cliente (Astro SSR, puerto 4321)
   │  fetch (cookie auth_token)
   ▼
@@ -380,10 +339,6 @@ Roles: many-to-many (UserRole) + requireRole()`,
     category: "web",
     year: 2026,
     goal: "Diseñar una landing premium que transmita una experiencia sensorial —una cafetería de especialidad de inspiración japonesa, con ritmo lento y atención al detalle— y que funcione tanto como propuesta comercial de diseño como plantilla reutilizable para futuras cafeterías.",
-    problem:
-      "Los sitios de cafeterías suelen ser genéricos y centrados en listar información. Acá se busca transmitir una identidad cálida y pausada a través del diseño y la interacción, convirtiendo la navegación en parte de la experiencia de la marca.",
-    solution:
-      "Landing Astro con islas de React y animaciones GSAP (scroll-trigger, timelines) más Framer Motion para micro-interacciones. Contenido centralizado en src/data/, loader animado que respeta autoplay, menú interactivo filtrable sin PDF, galería en collage con visor fullscreen y ubicación con mapa embebido e ilustración propia.",
     architecture: `src/
 ├── components/
 │   ├── astro/         # componentes estáticos (.astro)
