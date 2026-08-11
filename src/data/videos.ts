@@ -46,7 +46,7 @@ export const videos: VideoWork[] = [
     duration: "02:26",
     tag: "Producción completa",
     role: "Editor de video",
-    software: ["Premiere Pro"],
+    software: ["Premiere Pro", "Sony Vegas"],
     category: "inmobiliaria",
     featured: true,
     objective:
@@ -73,7 +73,7 @@ export const videos: VideoWork[] = [
     duration: "03:29",
     tag: "Producción completa",
     role: "Editor de video",
-    software: ["Premiere Pro"],
+    software: ["Premiere Pro", "Sony Vegas"],
     category: "inmobiliaria",
     featured: true,
     objective:
@@ -100,7 +100,7 @@ export const videos: VideoWork[] = [
     duration: "02:29",
     tag: "Producción completa",
     role: "Editor de video",
-    software: ["Premiere Pro"],
+    software: ["Premiere Pro", "Sony Vegas"],
     category: "inmobiliaria",
     featured: true,
     objective:

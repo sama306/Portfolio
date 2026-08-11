@@ -44,9 +44,9 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Crear preview "Cinematic Editing" en Home (3 cards)
 - [x] Crear página `/videos` con hero + "The Process" + "The Toolkit" + grid + filtros
 - [x] Crear página individual de video
-- [ ] Cargar videos reales de la experiencia en la inmobiliaria
-- [ ] Optimizar thumbnails
-- [ ] Optimizar videos (compresión)
+- [x] Cargar videos reales de la experiencia en la inmobiliaria
+- [x] Optimizar thumbnails
+- [x] Optimizar videos (compresión)
 
 ## Fase 5 — Animaciones
 
