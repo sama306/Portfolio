@@ -60,7 +60,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 ## Fase 6 — Responsive / Mobile
 
 - [x] Ajustar Desktop
-- [ ] Ajustar Tablet
+- [x] Ajustar Tablet
 - [x] Ajustar Mobile
 - [ ] Menú hamburguesa funcional
 - [ ] Videos/imágenes responsive
