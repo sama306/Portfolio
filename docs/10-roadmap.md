@@ -52,7 +52,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 
 - [x] Elegir librería (GSAP o Framer Motion) — ver `07-animaciones.md`
 - [x] Animaciones de entrada por scroll en cada sección
-- [ ] Hover states en cards (borde a cyan + grayscale→color, sin sombras ni scale del contenedor)
+- [x] Hover states en cards (borde a cyan + grayscale→color, sin sombras ni scale del contenedor)
 - [ ] Scroll progress bar
 - [ ] Transiciones entre páginas (evaluar Astro View Transitions)
 - [ ] Verificar `prefers-reduced-motion` en todo lo anterior
