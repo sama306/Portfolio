@@ -4,17 +4,19 @@ import ProjectCard from './ProjectCard.astro';
 
 // Featured Work — sección 4 del Home (ver 03-secciones-home.md §4).
 // Preview de los proyectos con `featured: true` (content-driven, src/data/projects.ts).
-// No es el listado completo (eso vive en /projects). Sin animaciones de scroll (Fase 5).
+// No es el listado completo (eso vive en /projects). Entrada por scroll con data-reveal (Fase 5).
 const featured = projects.filter((project) => project.featured);
 ---
 
 <section id="trabajo-destacado" class="mx-auto w-full max-w-[1200px] px-gutter pt-section-gap">
-  <h2 class="font-headline-md text-headline-md text-on-surface">Trabajo Destacado</h2>
+  <h2 class="font-headline-md text-headline-md text-on-surface" data-reveal>Trabajo Destacado</h2>
 
   <div class="mt-12 grid grid-cols-1 gap-element-gap md:grid-cols-2">
     {
-      featured.map((project) => (
-        <ProjectCard project={project} />
+      featured.map((project, index) => (
+        <div data-reveal data-reveal-delay={String(index * 0.08)}>
+          <ProjectCard project={project} />
+        </div>
       ))
     }
   </div>

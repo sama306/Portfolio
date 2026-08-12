@@ -9,13 +9,14 @@ import { CONTACT_EMAIL, contactFormEndpoint } from '../data/socials';
   Estilo de inputs según DESIGN.md "Inputs & Forms": fondo surface inset, borde
   outline-variant, focus a tertiary con glow.
   `scroll-mt-28` para que la navbar fija no tape el título al scrollear.
+  Entrada por scroll con data-reveal (Fase 5).
 -->
 
 <section
   id="contacto"
   class="mx-auto w-full max-w-[1200px] scroll-mt-28 border-t border-outline-variant px-gutter py-section-gap"
 >
-  <div class="mx-auto mb-12 max-w-2xl text-center">
+  <div class="mx-auto mb-12 max-w-2xl text-center" data-reveal>
     <h2 class="font-headline-md text-headline-md text-on-surface">
       ¿Tenés un proyecto en mente? Hablemos.
     </h2>
@@ -25,7 +26,7 @@ import { CONTACT_EMAIL, contactFormEndpoint } from '../data/socials';
     </p>
   </div>
 
-  <div class="mx-auto w-full max-w-xl">
+  <div class="mx-auto w-full max-w-xl" data-reveal data-reveal-delay="0.1">
     <!-- Formulario -->
     <form
         data-contact-form

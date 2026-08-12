@@ -11,7 +11,7 @@ import { videos } from '../../data/videos';
 
   <main class="flex-1 pt-32 pb-section-gap">
     <!-- Header de la página (ver 05-audiovisual.md): título display-lg + subtítulo body-lg -->
-    <header class="mx-auto w-full max-w-[1200px] px-gutter text-center md:text-left">
+    <header class="mx-auto w-full max-w-[1200px] px-gutter text-center md:text-left" data-reveal>
       <h1 class="font-display-lg text-display-lg-mobile text-on-surface md:text-display-lg">
         Producción Audiovisual.
       </h1>
@@ -22,7 +22,9 @@ import { videos } from '../../data/videos';
       </p>
     </header>
 
-    <VideoGrid client:load videos={videos} />
+    <div data-reveal>
+      <VideoGrid client:load videos={videos} />
+    </div>
   </main>
 
   <Footer />

@@ -59,7 +59,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
 
 <main class="mx-auto w-full max-w-[1200px] flex-1 px-gutter pb-section-gap pt-32">
   <!-- ─── Hero ─────────────────────────────────────────────── -->
-  <header>
+  <header data-reveal>
     <a
       href="/videos"
       class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
@@ -80,7 +80,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   </header>
 
   <!-- ─── Reproductor: YouTube embed integrado como card ───── -->
-  <section class="mt-12">
+  <section class="mt-12" data-reveal>
     <div class="overflow-hidden rounded-lg border border-outline-variant bg-surface-container">
       <div class="aspect-video w-full">
         <iframe
@@ -96,7 +96,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   </section>
 
   <!-- ─── Información ──────────────────────────────────────── -->
-  <section class="mt-section-gap">
+  <section class="mt-section-gap" data-reveal>
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Información
     </h2>
@@ -132,7 +132,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   </section>
 
   <!-- ─── Proceso (bloque code-block-border, mismo tratamiento que "The Process") ── -->
-  <section class="mt-section-gap">
+  <section class="mt-section-gap" data-reveal>
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Proceso
     </h2>
@@ -148,7 +148,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   </section>
 
   <!-- ─── Resultado ────────────────────────────────────────── -->
-  <section class="mt-section-gap">
+  <section class="mt-section-gap" data-reveal>
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Resultado
     </h2>
@@ -158,7 +158,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   </section>
 
   <!-- ─── Prev / Next video ────────────────────────────────── -->
-  <section class="mt-section-gap border-t border-outline-variant pt-16">
+  <section class="mt-section-gap border-t border-outline-variant pt-16" data-reveal>
     <div class="flex items-stretch justify-between gap-gutter">
       {
         prev ? (

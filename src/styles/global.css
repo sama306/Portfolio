@@ -143,6 +143,22 @@
   }
 }
 
+/* ─── Reveal por scroll (Fase 5) ─────────────────────────────
+   Estado base: solo se oculta cuando JS está activo (.js) para que
+   sin JS el contenido se vea siempre. GSAP anima a opacity:1 / y:0.
+   Bajo prefers-reduced-motion el contenido queda visible siempre. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ─── Nav link activo: barra 2px tertiary, 4px debajo del texto ── */
 .nav-link {
   position: relative;

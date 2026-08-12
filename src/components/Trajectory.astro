@@ -11,14 +11,14 @@ const educacion = experience.filter((item) => item.type === 'educacion');
   Col izq: timeline vertical, bullets en tertiary, orden decreciente.
   Col der: educación. [Nombre de la institución] es placeholder visible (confirmar con el usuario).
   Items de experiencia expandibles con <details>/<summary> nativo (sin librerías).
-  Sin animaciones de scroll (Fase 5). Hover/focus states: sistema base (02-diseño-visual.md).
+  Entrada por scroll con data-reveal (Fase 5). Hover/focus states: sistema base (02-diseño-visual.md).
 -->
 <section id="trayectoria" class="mx-auto w-full max-w-[1200px] px-gutter pt-section-gap">
-  <h2 class="font-headline-md text-headline-md text-on-surface">Trayectoria</h2>
+  <h2 class="font-headline-md text-headline-md text-on-surface" data-reveal>Trayectoria</h2>
 
   <div class="mt-12 grid grid-cols-1 gap-element-gap lg:grid-cols-12 lg:gap-6">
     <!-- ── Columna Experiencia ───────────────────────────── -->
-    <div class="flex flex-col lg:col-span-7">
+    <div class="flex flex-col lg:col-span-7" data-reveal data-reveal-delay="0.05">
       <p class="font-label-caps text-label-caps text-on-surface-variant">Experiencia</p>
 
       <ol class="mt-6 flex flex-col">
@@ -87,7 +87,7 @@ const educacion = experience.filter((item) => item.type === 'educacion');
     </div>
 
     <!-- ── Columna Educación ─────────────────────────────── -->
-    <div class="flex flex-col lg:col-span-5">
+    <div class="flex flex-col lg:col-span-5" data-reveal data-reveal-delay="0.1">
       <p class="font-label-caps text-label-caps text-on-surface-variant">Educación</p>
 
       <div class="mt-6 flex flex-col">

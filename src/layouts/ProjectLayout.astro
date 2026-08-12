@@ -48,7 +48,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
 
 <main class="mx-auto w-full max-w-[1200px] flex-1 px-gutter pb-section-gap pt-32">
   <!-- ─── Hero ─────────────────────────────────────────────── -->
-  <header>
+  <header data-reveal>
     <a
       href="/projects"
       class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
@@ -99,7 +99,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   <!-- ─── Nota de portfolio (honestidad sobre demo/estado) ──── -->
   {
     project.portfolioNote && (
-      <aside class="mt-section-gap rounded-lg border border-tertiary/30 bg-tertiary/10 p-6">
+      <aside class="mt-section-gap rounded-lg border border-tertiary/30 bg-tertiary/10 p-6" data-reveal>
         <p class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-tertiary">
           <span class="material-symbols-outlined text-[16px]" aria-hidden="true">info</span>
           Proyecto de portfolio
@@ -112,7 +112,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   <!-- ─── Información (solo subsecciones presentes) ─────────── -->
   {
     sections.length > 0 && (
-      <section class="mt-section-gap">
+      <section class="mt-section-gap" data-reveal>
         <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
           Información
         </h2>
@@ -152,7 +152,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   }
 
   <!-- ─── Imágenes ─────────────────────────────────────────── -->
-  <section class="mt-section-gap">
+  <section class="mt-section-gap" data-reveal>
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Imágenes
     </h2>
@@ -162,7 +162,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   </section>
 
   <!-- ─── Tecnologías ──────────────────────────────────────── -->
-  <section class="mt-section-gap">
+  <section class="mt-section-gap" data-reveal>
     <h2 class="border-b border-outline-variant pb-4 font-label-caps text-label-caps text-on-surface-variant">
       Tecnologías
     </h2>
@@ -178,7 +178,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   </section>
 
   <!-- ─── Prev / Next proyecto ─────────────────────────────── -->
-  <section class="mt-section-gap border-t border-outline-variant pt-16">
+  <section class="mt-section-gap border-t border-outline-variant pt-16" data-reveal>
     <div class="flex items-stretch justify-between gap-gutter">
       {
         prev ? (

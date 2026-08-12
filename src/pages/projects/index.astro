@@ -12,7 +12,7 @@ import { projects } from '../../data/projects';
 
   <main class="flex-1 pt-32 pb-section-gap">
     <!-- Header de la página (ver 04-proyectos.md): título en 2 líneas, segunda en cyan -->
-    <header class="mx-auto w-full max-w-[1200px] px-gutter text-center md:text-left">
+    <header class="mx-auto w-full max-w-[1200px] px-gutter text-center md:text-left" data-reveal>
       <h1 class="font-display-lg text-display-lg-mobile text-on-surface md:text-display-lg">
         <span class="block">Proyectos</span>
         <span class="block text-tertiary">Seleccionados.</span>
@@ -23,7 +23,9 @@ import { projects } from '../../data/projects';
       </p>
     </header>
 
-    <ProjectGrid client:load projects={projects} />
+    <div data-reveal>
+      <ProjectGrid client:load projects={projects} />
+    </div>
 
     <TechnicalExplorations />
   </main>

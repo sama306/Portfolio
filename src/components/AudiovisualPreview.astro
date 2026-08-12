@@ -4,13 +4,13 @@ import { videos } from '../data/videos';
 // Cinematic Editing — sección 5 del Home (ver 03-secciones-home.md §5).
 // Preview de los trabajos audiovisuales con `featured: true` (content-driven,
 // src/data/videos.ts). Cards chicas inline (VideoCard.astro se crea en Fase 4).
-// Sin animaciones de scroll (Fase 5). Estructura replicada del mockup de
-// referencia home-reference.html §videos (border-t + py-section-gap).
+// Entrada por scroll con data-reveal + stagger en cards (Fase 5). Estructura
+// replicada del mockup de referencia home-reference.html §videos (border-t + py-section-gap).
 const featured = videos.filter((video) => video.featured);
 ---
 
 <section id="videos" class="mx-auto w-full max-w-[1200px] border-t border-outline-variant px-gutter py-section-gap">
-  <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+  <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end" data-reveal>
     <div>
       <h2 class="font-headline-md text-headline-md text-on-surface">Cinematic Editing</h2>
       <p class="mt-2 font-body-md text-body-md text-on-surface-variant">
@@ -31,8 +31,13 @@ const featured = videos.filter((video) => video.featured);
 
   <div class="grid grid-cols-1 gap-element-gap md:grid-cols-3">
     {
-      featured.map((video) => (
-        <a href={`/videos/${video.slug}`} class="group block">
+      featured.map((video, index) => (
+        <a
+          href={`/videos/${video.slug}`}
+          class="group block"
+          data-reveal
+          data-reveal-delay={String(index * 0.08)}
+        >
           <div class="relative mb-4 aspect-video overflow-hidden rounded-lg border border-outline-variant">
             <img
               class="h-full w-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"

@@ -5,7 +5,8 @@
 // en Proyectos/Videos (borde outline-variant, hover a tertiary, sin fondo sólido).
 // Layout: "bento" de 12 columnas (Lenguajes 7 + Frameworks 5 / Herramientas 7 + Diseño 5 / Bases de datos full).
 // Mobile: todas las categorías apiladas en 1 columna.
-// Sin animaciones de scroll (Fase 5). Hover en badges: parte del sistema base (02-diseño-visual.md).
+// Entrada por scroll con data-reveal + stagger en bloques (Fase 5).
+// Hover en badges: parte del sistema base (02-diseño-visual.md).
 const skillGroups = [
   { label: 'Lenguajes', span: 'lg:col-span-7', items: ['Python', 'C', 'SQL', 'Assembly 8086', 'HTML', 'CSS', 'JavaScript'] },
   { label: 'Frameworks / Tecnologías', span: 'lg:col-span-5', items: ['Astro', 'React', '.NET', 'Kivy'] },
@@ -16,13 +17,17 @@ const skillGroups = [
 ---
 
 <section id="skills" class="mx-auto w-full max-w-[1200px] px-gutter pt-section-gap">
-  <h2 class="font-headline-md text-headline-md text-on-surface">Skills</h2>
+  <h2 class="font-headline-md text-headline-md text-on-surface" data-reveal>Skills</h2>
 
   <!-- Bento: fila 1 (7/5), fila 2 (7/5), fila 3 (12). Mobile: 1 columna. -->
   <div class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
     {
-      skillGroups.map((group) => (
-        <div class={`rounded-lg border border-outline-variant bg-surface-variant px-8 py-8 ${group.span}`}>
+      skillGroups.map((group, index) => (
+        <div
+          class={`rounded-lg border border-outline-variant bg-surface-variant px-8 py-8 ${group.span}`}
+          data-reveal
+          data-reveal-delay={String(index * 0.08)}
+        >
           <p class="font-label-caps text-label-caps text-on-surface-variant">{group.label}</p>
           <div class="mt-5 flex flex-wrap gap-3">
             {
