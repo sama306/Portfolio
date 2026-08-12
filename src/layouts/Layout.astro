@@ -31,9 +31,21 @@ const { title = 'Dante Samacoits' } = Astro.props;
     />
   </head>
   <body>
+    <!--
+      Scroll progress bar (07-animaciones.md): barra fina de ~2px en el borde
+      superior del viewport, ancho proporcional al scroll. Encima del navbar
+      (z-60 > z-50). `aria-hidden`: decorativa, el progreso no aporta a SR.
+      `data-scroll-progress` es estilada/animada por scroll-progress.ts.
+    -->
+    <div
+      data-scroll-progress
+      aria-hidden="true"
+      class="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-tertiary"
+    ></div>
     <slot />
     <script>
       import '../scripts/reveal';
+      import '../scripts/scroll-progress';
     </script>
   </body>
 </html>

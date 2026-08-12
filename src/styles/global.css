@@ -169,6 +169,22 @@
   border-bottom: 2px solid var(--color-tertiary);
 }
 
+/* ─── Scroll progress bar (Fase 5) ──────────────────────────────
+   Barra fina en el borde superior del viewport, encima del navbar.
+   El ancho lo setea scroll-progress.ts vía transform: scaleX (sin reflow).
+   Transición mínima para suavizar el seguimiento; eliminada bajo
+   prefers-reduced-motion (la barra sigue actualizándose, sin suavizado). */
+[data-scroll-progress] {
+  transform: scaleX(0);
+  transition: transform 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-progress] {
+    transition: none;
+  }
+}
+
 /* ─── Bloque de código / proceso: borde izquierdo 4px tertiary ── */
 .code-block-border {
   border-left: 4px solid var(--color-tertiary);
