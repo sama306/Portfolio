@@ -52,11 +52,17 @@ Cursor circular pequeño que reacciona (crece / cambia de forma) al pasar sobre 
 
 ## Transiciones entre páginas
 
-Al entrar a una página de detalle (`/projects/[slug]`, `/videos/[slug]`):
-```
-Página actual → fade / slide → Detalle
-```
-Astro View Transitions es el mecanismo más natural para esto en este stack — evaluarlo primero antes de armar algo custom con la librería de animación.
+**Implementado con Astro View Transitions (Fase 5).** En Astro 7 el componente es `<ClientRouter />` de `astro:transitions` (reemplazó a `<ViewTransitions />`).
+
+- Se activa en todo el sitio desde `Layout.astro` (`<ClientRouter />` en `<head>`).
+- Transición default custom, aplicada al `<html>` con `transition:animate`:
+  - página vieja: **fade-out** (150ms);
+  - página nueva: **fade + leve rise** (opacity + `translateY(16px)`, 350ms) — mismo lenguaje que el reveal por scroll.
+  - Los keyframes (`astro-fade-out`, `astro-fade-in-up`) viven en `global.css`.
+- `<ClientRouter />` desactiva automáticamente todas las transiciones (swap instantáneo) bajo `prefers-reduced-motion` — no hace falta código extra.
+- `Navbar.astro` usa `transition:persist` para reutilizar el navbar entre páginas sin parpadeo. Los links `/#contacto` (Navbar CTA, Hero, Footer) siguen funcionando: el router maneja los hash nativamente y `scroll-behavior: smooth` de `html` da el desplazamiento suave.
+- `reveal.ts` refresca `ScrollTrigger` en `astro:page-load` para que los reveals se recalculen tras cada navegación SPA (el `window.load` no dispara en SPA).
+- No se implementó por ahora el morph de imagen compartida card → detalle (`transition:name`); se puede evaluar en una sesión futura (videos no aplica: el detalle es un iframe, no un thumbnail).
 
 ## Regla no negociable: `prefers-reduced-motion`
 

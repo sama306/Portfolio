@@ -1,19 +1,41 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
 }
 
 const { title = 'Dante Samacoits' } = Astro.props;
+
+/*
+  Transición default entre páginas (Fase 5, 07-animaciones.md):
+  fade-out de la página vieja + fade-in con un leve rise de la nueva,
+  a tono con el lenguaje del reveal (opacity + translateY). Aplicada a
+  todo el sitio vía <html transition:animate>. Los keyframes viven en
+  global.css. Bajo prefers-reduced-motion ClientRouter las desactiva
+  automáticamente (swap instantáneo).
+*/
+const pageTransition = {
+  forwards: {
+    old: { name: 'astro-fade-out', duration: 150, easing: 'ease-out', fillMode: 'both' },
+    new: { name: 'astro-fade-in-up', duration: 350, easing: 'ease-out', fillMode: 'both' },
+  },
+  backwards: {
+    old: { name: 'astro-fade-out', duration: 150, easing: 'ease-in', fillMode: 'both' },
+    new: { name: 'astro-fade-in-up', duration: 350, easing: 'ease-in', fillMode: 'both' },
+  },
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" transition:animate={pageTransition}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <ClientRouter />
 
     <script is:inline>
       document.documentElement.classList.add('js');
@@ -46,6 +68,7 @@ const { title = 'Dante Samacoits' } = Astro.props;
     <script>
       import '../scripts/reveal';
       import '../scripts/scroll-progress';
+      import '../scripts/view-transitions';
     </script>
   </body>
 </html>

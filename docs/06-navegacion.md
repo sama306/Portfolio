@@ -22,6 +22,8 @@ DANTE            Sobre mí   Proyectos   Videos            [ Contactarme ]
 
 Como el Home **es** la página que contiene Hero + Trayectoria + Skills + Featured Work + preview audiovisual + Contacto (ver `03-secciones-home.md`), el link "Sobre mí" del nav **no es una ruta separada** — apunta a `/` (o hace scroll al tope si ya se está en home). No crear una ruta `/about` redundante con `/`. Si en el futuro el usuario prefiere separar "Sobre mí" del resto del Home en su propia página, se evalúa en esa sesión — por ahora seguimos el principio original del proyecto de navegación vertical en una sola página para el contenido personal/CV.
 
+> **Con View Transitions (Fase 5):** ya en home, el click a `/` es navegación same-page sin hash y el router no hace nada por defecto. `Navbar.astro` maneja ese caso con scroll suave al tope (auto bajo `prefers-reduced-motion`).
+
 ## Mobile: menú hamburguesa
 
 Se mantiene igual que en la v1 (ver también `08-responsive-mobile.md`). El menú desplegado debe:

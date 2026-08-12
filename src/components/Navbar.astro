@@ -2,25 +2,59 @@
 ---
 
 <script>
-  const nav: HTMLElement | null = document.querySelector('[data-navbar]');
+  // Cambio sutil al scrollear: se intensifica la opacidad del fondo glass.
+  // Vuelve a consultar la barra en cada invocación porque con View Transitions
+  // el módulo se re-ejecuta por navegación pero window/document persisten.
   const update = () => {
+    const nav: HTMLElement | null = document.querySelector('[data-navbar]');
     if (!nav) return;
-    // Cambio sutil al scrollear: se intensifica la opacidad del fondo glass.
     const scrolled = window.scrollY > 24;
     nav.style.backgroundColor = scrolled
       ? 'rgba(67, 71, 78, 0.85)'
       : 'rgba(67, 71, 78, 0.4)'; // secondary-container "#43474e"
   };
-  window.addEventListener('scroll', update, { passive: true });
+
+  if (!(window as unknown as Record<string, unknown>).__navbarBound) {
+    (window as unknown as Record<string, unknown>).__navbarBound = true;
+    window.addEventListener('scroll', update, { passive: true });
+
+    // "Sobre mí" apunta a "/". Ya estando en home, con View Transitions el click
+    // same-page sin hash no hace nada por defecto → scroll suave al tope (auto
+    // bajo prefers-reduced-motion) y se limpia el hash si lo hubiera.
+    // En fase capture para correr antes que el listener del ClientRouter.
+    document.addEventListener(
+      'click',
+      (event) => {
+        const isHomeLink =
+          event.target instanceof Element &&
+          !!event.target.closest('[data-nav-home]');
+        if (!isHomeLink) return;
+        if (window.location.pathname !== '/') return;
+        event.preventDefault();
+        if (location.hash) history.replaceState(history.state, '', location.pathname);
+        window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'auto'
+            : 'smooth',
+        });
+      },
+      true
+    );
+  }
+
   update();
 </script>
 
 <!--
   Navbar fija con glassmorphism (blur + secondary-container 40%).
   Glass reservado únicamente para la barra persistente (ver 02-diseño-visual.md).
+  `transition:persist` (Fase 5): el navbar se reutiliza entre páginas con View
+  Transitions para no parpadear ni re-renderizarse en cada navegación.
 -->
 <nav
   data-navbar
+  transition:persist
   class="fixed top-0 z-50 w-full border-b border-outline-variant bg-secondary-container/40 backdrop-blur-xl transition-colors duration-300"
 >
   <div class="mx-auto flex h-20 w-full max-w-[1200px] items-center justify-between px-gutter">
@@ -33,6 +67,7 @@
     <div class="hidden items-center gap-element-gap md:flex">
       <a
         href="/"
+        data-nav-home
         aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
         class:list={[
           'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
