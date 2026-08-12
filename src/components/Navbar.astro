@@ -14,9 +14,28 @@
       : 'rgba(67, 71, 78, 0.4)'; // secondary-container "#43474e"
   };
 
+  // Estado activo dinámico: con `transition:persist` el navbar se reutiliza entre
+  // páginas (View Transitions) y las clases calculadas en el build con
+  // Astro.url.pathname quedan congeladas. Este listener marca/desmarca el link
+  // correcto según location.pathname en cada astro:page-load.
+  const updateActive = () => {
+    const pathname = location.pathname;
+    document.querySelectorAll<HTMLAnchorElement>('a[data-nav-link]').forEach((link) => {
+      const href = link.getAttribute('href') ?? '';
+      const isActive =
+        href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
+      link.classList.toggle('nav-link', isActive);
+      link.classList.toggle('active', isActive);
+      link.classList.toggle('text-tertiary', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
   if (!(window as unknown as Record<string, unknown>).__navbarBound) {
     (window as unknown as Record<string, unknown>).__navbarBound = true;
     window.addEventListener('scroll', update, { passive: true });
+    document.addEventListener('astro:page-load', updateActive);
 
     // "Sobre mí" apunta a "/". Ya estando en home, con View Transitions el click
     // same-page sin hash no hace nada por defecto → scroll suave al tope (auto
@@ -44,6 +63,7 @@
   }
 
   update();
+  updateActive();
 </script>
 
 <!--
@@ -68,6 +88,7 @@
       <a
         href="/"
         data-nav-home
+        data-nav-link
         aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
         class:list={[
           'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
@@ -78,6 +99,7 @@
       </a>
       <a
         href="/projects"
+        data-nav-link
         aria-current={Astro.url.pathname.startsWith('/projects') ? 'page' : undefined}
         class:list={[
           'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
@@ -88,6 +110,7 @@
       </a>
       <a
         href="/videos"
+        data-nav-link
         aria-current={Astro.url.pathname.startsWith('/videos') ? 'page' : undefined}
         class:list={[
           'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
