@@ -136,6 +136,15 @@
     color: var(--color-on-tertiary);
   }
 
+  /* Foco visible por teclado (09-seo-accesibilidad-performance.md): outline
+     tertiary en `:focus-visible` para links/buttons. Los inputs del form y
+     los elementos con `focus-visible:ring` ya pintan su propio estado y lo
+     sobreescriben por especificidad; esta regla cubre el resto del sitio. */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-tertiary);
+    outline-offset: 2px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -167,6 +176,46 @@
 
 .nav-link.active {
   border-bottom: 2px solid var(--color-tertiary);
+}
+
+/* ─── Menú mobile (hamburguesa) — Fase 6 (06-navegacion.md) ──────
+   Overlay full-screen debajo del header, superficie opaca primary-container
+   (el glass queda reservado al navbar). Cerrado por defecto: invisible +
+   opacity 0 + rise 16px. `menu-open` (toggleado por Navbar.astro) lo muestra.
+   La transición es movimiento: bajo prefers-reduced-motion se anula y el menú
+   aparece/desaparece instantáneo (siempre alcanzable, no depende de JS). */
+[data-mobile-menu] {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out,
+    visibility 0s linear 0.25s;
+}
+
+[data-mobile-menu].menu-open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-mobile-menu],
+  [data-mobile-menu].menu-open {
+    transition: none;
+  }
+}
+
+/* Scroll bloqueado mientras el drawer está abierto (evita scroll de fondo). */
+html[data-menu-open],
+html[data-menu-open] body {
+  overflow: hidden;
 }
 
 /* ─── Scroll progress bar (Fase 5) ──────────────────────────────

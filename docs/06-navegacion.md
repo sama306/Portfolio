@@ -26,11 +26,19 @@ Como el Home **es** la página que contiene Hero + Trayectoria + Skills + Featur
 
 ## Mobile: menú hamburguesa
 
-Se mantiene igual que en la v1 (ver también `08-responsive-mobile.md`). El menú desplegado debe:
-- Ocupar overlay completo o panel lateral (decidir en implementación).
-- Cerrarse al tocar un link o al tocar fuera del menú.
-- Ser navegable por teclado y con foco visible.
-- El botón "Contactarme" se mantiene visible/destacado incluso colapsado el menú (puede quedar siempre visible en el header mobile, con el ícono de hamburguesa aparte).
+Implementado en Fase 6. Decisiones tomadas:
+
+- **Tipo de menú:** overlay **full-screen** debajo del header (`top-20` → `bottom`, la barra queda visible con el wordmark + toggle menu/close). Superficie opaca `primary-container` con `border-t outline-variant` — el glassmorphism queda reservado al navbar persistente (ver `02-diseño-visual.md`).
+- **Breakpoint:** hamburguesa por debajo de `md` (768px), igual que el toggle de los mockups de referencia (`md:hidden`). La tablet (768–1024) conserva los links inline del header.
+- **CTA "Contactarme":** dentro del drawer, como botón primario cyan full-width anclado al fondo (`mt-auto`). Es visible y destacado apenas se abre el menú. (El wordmark largo "Dante Valentin Samacoits" no deja espacio en 375px para CTA texto + hamburguesa en el header.)
+- **Cierre del menú:** al tocar un link (antes de navegar), al tocar fuera del drawer (cualquier click que no sea el toggle), o con la tecla `Esc`. Al cruzar a ≥768px también se cierra (`matchMedia`).
+- **Teclado/atención (ver `09-seo-accesibilidad-performance.md`):**
+  - `aria-expanded`/`aria-controls`/`aria-label` dinámico en el toggle; drawer con `role="dialog"` + `aria-modal`.
+  - Al abrir, el foco va al primer link; `Tab`/`Shift+Tab` quedan atrapados en el drawer mientras esté abierto; al cerrar con `Esc` el foco vuelve al toggle.
+  - `inert` aplicado al drawer cerrado (y a `main`/`footer` mientras está abierto) + `aria-hidden`. Foco visible global via `:focus-visible` outline en `tertiary`.
+  - Scroll del fondo bloqueado mientras el drawer está abierto (`html[data-menu-open]`).
+- **View Transitions:** la navbar es `transition:persist`, así que el drawer se cierra forzado en cada `astro:page-load` para no quedar abierto entre páginas.
+- **Sin JS:** el drawer se muestra como nav estática apilada bajo el header en mobile (`<noscript>` + `position: static`), y el toggle se oculta. El estado CSS base (`visibility: hidden`) saca el drawer del orden de foco cuando JS activo aún no lo inertizó.
 
 ## Rutas del sitio
 

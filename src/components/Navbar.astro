@@ -17,7 +17,8 @@
   // Estado activo dinámico: con `transition:persist` el navbar se reutiliza entre
   // páginas (View Transitions) y las clases calculadas en el build con
   // Astro.url.pathname quedan congeladas. Este listener marca/desmarca el link
-  // correcto según location.pathname en cada astro:page-load.
+  // correcto según location.pathname en cada astro:page-load. Aplica tanto a los
+  // links de desktop como a los del menú mobile (comparten `data-nav-link`).
   const updateActive = () => {
     const pathname = location.pathname;
     document.querySelectorAll<HTMLAnchorElement>('a[data-nav-link]').forEach((link) => {
@@ -30,6 +31,51 @@
       if (isActive) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
+  };
+
+  // ─── Menú mobile (Fase 6, 06-navegacion.md) ─────────────────────
+  // Overlay full-screen debajo del header. El estado se maneja con la clase
+  // `.menu-open` (definida en global.css) + `inert`/`aria-hidden` (que el menú
+  // cerrado no sea enfocable ni visible para lectores de pantalla).
+  const getMenu = () => document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const getToggle = () => document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const isMenuOpen = () => getToggle()?.getAttribute('aria-expanded') === 'true';
+
+  const setMenu = (open: boolean, restoreFocus = false) => {
+    const menu = getMenu();
+    const toggle = getToggle();
+    if (!menu || !toggle) return;
+
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+
+    const iconOpen = document.querySelector<HTMLElement>('[data-menu-icon-open]');
+    const iconClose = document.querySelector<HTMLElement>('[data-menu-icon-close]');
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+
+    if (open) {
+      menu.classList.add('menu-open');
+      menu.removeAttribute('inert');
+      menu.removeAttribute('aria-hidden');
+      document.documentElement.dataset.menuOpen = 'true'; // scroll lock (global.css)
+      // Modal correcto: el resto de la página queda inert mientras el menú
+      // está abierto (sólo el drawer es interactivo).
+      document.querySelector('main')?.setAttribute('inert', '');
+      document.querySelector('footer')?.setAttribute('inert', '');
+      // Foco al primer link dentro del menú (modal focus).
+      requestAnimationFrame(() => {
+        menu.querySelector<HTMLElement>('a[href]')?.focus();
+      });
+    } else {
+      menu.classList.remove('menu-open');
+      menu.setAttribute('inert', '');
+      menu.setAttribute('aria-hidden', 'true');
+      delete document.documentElement.dataset.menuOpen;
+      document.querySelector('main')?.removeAttribute('inert');
+      document.querySelector('footer')?.removeAttribute('inert');
+      if (restoreFocus) toggle.focus();
+    }
   };
 
   if (!(window as unknown as Record<string, unknown>).__navbarBound) {
@@ -60,6 +106,60 @@
       },
       true
     );
+
+    // Toggle del menú.
+    getToggle()?.addEventListener('click', () => setMenu(!isMenuOpen()));
+
+    // Cierre por click fuera del drawer: cualquier click que no sea el toggle
+    // (links del menú incluidos, se cierra antes de navegar).
+    document.addEventListener(
+      'click',
+      (event) => {
+        if (!isMenuOpen()) return;
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target || target.closest('[data-menu-toggle]')) return;
+        setMenu(false);
+      },
+      true
+    );
+
+    // Teclado: Esc cierra (devolviendo el foco al toggle) y Tab queda atrapado
+    // dentro del menú mientras está abierto (modal focus loop).
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        if (isMenuOpen()) setMenu(false, true);
+        return;
+      }
+      if (event.key !== 'Tab' || !isMenuOpen()) return;
+      const menu = getMenu();
+      if (!menu) return;
+      const focusables = Array.from(
+        menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      ).filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement as HTMLElement | null;
+      if (event.shiftKey && (!active || !menu.contains(active) || active === first)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (!active || !menu.contains(active) || active === last)) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    // Al cruzar a desktop (md = 768px) el menú se cierra: los links inline
+    // del header vuelven a ser los visibles.
+    const mobileBreakpoint = window.matchMedia('(min-width: 768px)');
+    mobileBreakpoint.addEventListener('change', (event) => {
+      if (event.matches) setMenu(false);
+    });
+
+    // Safety net por View Transitions: la navbar tiene `transition:persist`,
+    // así que el drawer persistiría abierto entre páginas. Se cierra en cada
+    // navegación SPA (y en la carga inicial, idempotente).
+    document.addEventListener('astro:page-load', () => setMenu(false));
   }
 
   update();
@@ -71,6 +171,8 @@
   Glass reservado únicamente para la barra persistente (ver 02-diseño-visual.md).
   `transition:persist` (Fase 5): el navbar se reutiliza entre páginas con View
   Transitions para no parpadear ni re-renderizarse en cada navegación.
+  Mobile (Fase 6): solo wordmark + toggle hamburguesa; el CTA y el menú
+  completo viven en el drawer (06-navegacion.md).
 -->
 <nav
   data-navbar
@@ -79,11 +181,11 @@
 >
   <div class="mx-auto flex h-20 w-full max-w-[1200px] items-center justify-between px-gutter">
     <!-- Wordmark (placeholder de texto, no un logo) -->
-    <a href="/" class="font-display-lg text-primary text-[28px] tracking-tighter">
+    <a href="/" class="min-w-0 truncate font-display-lg text-primary text-[28px] tracking-tighter">
       Dante Valentin Samacoits
     </a>
 
-    <!-- Links de navegación -->
+    <!-- Links de navegación (desktop) -->
     <div class="hidden items-center gap-element-gap md:flex">
       <a
         href="/"
@@ -121,12 +223,119 @@
       </a>
     </div>
 
-    <!-- CTA primario sólido cyan (distinto visualmente de los links). Lleva a la sección Contacto del Home. -->
+    <!-- CTA primario sólido cyan (desktop). Lleva a la sección Contacto del Home. -->
     <a
       href="/#contacto"
       class="font-label-caps text-label-caps hidden rounded bg-tertiary px-6 py-3 text-on-tertiary transition-colors duration-300 hover:bg-tertiary-fixed-dim md:block"
     >
       Contactarme
     </a>
+
+    <!-- Toggle hamburguesa (mobile). Ícono menu ↔ close según estado. -->
+    <button
+      type="button"
+      data-menu-toggle
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+      class="inline-flex h-11 w-11 shrink-0 items-center justify-center text-primary transition-colors duration-300 md:hidden"
+    >
+      <span data-menu-icon-open class="material-symbols-outlined text-[24px] leading-none">menu</span>
+      <span data-menu-icon-close class="material-symbols-outlined hidden text-[24px] leading-none">close</span>
+    </button>
   </div>
 </nav>
+
+<!--
+  Menú mobile: overlay full-screen debajo del header (top-20 → bottom, Fase 6).
+  Superficie opaca primary-container (el glass queda reservado al navbar).
+  El estado abierto/cerrado + transición viven en global.css (.menu-open);
+  `inert`/`aria-hidden` los aplica el JS en runtime al cerrar (en el primer
+  astro:page-load ya queda cerrado). Sin inert inicial: la CSS `visibility:
+  hidden` ya lo saca del orden de foco, y el fallback <noscript> necesita sus
+  links accesibles si el usuario navega sin JS.
+  Links comparten `data-nav-link`/`data-nav-home` del desktop: heredan el estado
+  activo (updateActive) y el scroll-al-tope del Home. CTA primario al fondo.
+-->
+<div
+  id="mobile-menu"
+  data-mobile-menu
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú principal"
+  class="fixed inset-x-0 bottom-0 top-20 z-40 flex flex-col overflow-y-auto border-t border-outline-variant bg-primary-container px-gutter pb-gutter pt-element-gap"
+>
+  <nav class="flex flex-col">
+    <a
+      href="/"
+      data-nav-home
+      data-nav-link
+      aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
+      class:list={[
+        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        Astro.url.pathname === '/' && 'nav-link active text-tertiary',
+      ]}
+    >
+      Sobre mí
+    </a>
+    <a
+      href="/projects"
+      data-nav-link
+      aria-current={Astro.url.pathname.startsWith('/projects') ? 'page' : undefined}
+      class:list={[
+        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        Astro.url.pathname.startsWith('/projects') && 'nav-link active text-tertiary',
+      ]}
+    >
+      Proyectos
+    </a>
+    <a
+      href="/videos"
+      data-nav-link
+      aria-current={Astro.url.pathname.startsWith('/videos') ? 'page' : undefined}
+      class:list={[
+        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        Astro.url.pathname.startsWith('/videos') && 'nav-link active text-tertiary',
+      ]}
+    >
+      Videos
+    </a>
+  </nav>
+
+  <!-- CTA anclado al fondo del drawer: visible y destacado apenas se abre el menú -->
+  <div class="mt-auto pt-element-gap">
+    <a
+      href="/#contacto"
+      class="block w-full rounded bg-tertiary px-6 py-4 text-center font-label-caps text-label-caps text-on-tertiary transition-colors duration-300 hover:bg-tertiary-fixed-dim"
+    >
+      Contactarme
+    </a>
+  </div>
+</div>
+
+<noscript>
+  <!--
+    Fallback sin JS (Fase 6): el toggle no funciona ni hay ClientRouter, así
+    que en mobile el drawer se muestra apilado bajo el header como nav estática
+    (los links vuelven a ser alcanzables con Tab y para lectores de pantalla).
+    En ≥ md los links del desktop ya están visibles y el drawer queda oculto.
+    `html` sin la clase `.js` (Layout la agrega en runtime) → el pre-hide por
+    scroll/reveal tampoco aplica y el contenido completo se ve sin animar.
+  -->
+  <style>
+    @media (max-width: 767px) {
+      [data-menu-toggle] {
+        display: none;
+      }
+      [data-mobile-menu] {
+        position: static;
+        margin-top: 5rem; /* clear del header fijo */
+        padding-top: 0;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+    }
+  </style>
+</noscript>

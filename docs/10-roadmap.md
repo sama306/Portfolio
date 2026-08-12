@@ -62,7 +62,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Ajustar Desktop
 - [x] Ajustar Tablet
 - [x] Ajustar Mobile
-- [ ] Menú hamburguesa funcional
+- [x] Menú hamburguesa funcional
 - [ ] Videos/imágenes responsive
 - [ ] Correr el checklist completo de `08-responsive-mobile.md`
 
