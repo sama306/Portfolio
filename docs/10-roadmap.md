@@ -59,9 +59,9 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 
 ## Fase 6 — Responsive / Mobile
 
-- [ ] Ajustar Desktop
+- [x] Ajustar Desktop
 - [ ] Ajustar Tablet
-- [ ] Ajustar Mobile
+- [x] Ajustar Mobile
 - [ ] Menú hamburguesa funcional
 - [ ] Videos/imágenes responsive
 - [ ] Correr el checklist completo de `08-responsive-mobile.md`
