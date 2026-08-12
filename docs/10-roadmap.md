@@ -55,7 +55,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Hover states en cards (borde a cyan + grayscale→color, sin sombras ni scale del contenedor)
 - [x] Scroll progress bar
 - [x] Transiciones entre páginas (evaluar Astro View Transitions) — implementado con `<ClientRouter />` (Astro 7) + transición custom fade/rise en `Layout.astro`, ver `07-animaciones.md`
-- [ ] Verificar `prefers-reduced-motion` en todo lo anterior
+- [x] Verificar `prefers-reduced-motion` en todo lo anterior — overrides quirúrgicos en `global.css`: zoom de imágenes en hover anulado (Tailwind v4 usa la propiedad `scale`; se neutraliza con `scale: var(--reduce-card-zoom, 1)` porque LightningCSS pliega valores literales) y underline del "Ver más" sin transición. El resto ya estaba cubierto (reveal, scroll progress, view transitions, status dot, toggle).
 
 ## Fase 6 — Responsive / Mobile
 
