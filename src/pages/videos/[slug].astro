@@ -27,7 +27,11 @@ const prev = videos[(index - 1 + videos.length) % videos.length];
 const next = videos[(index + 1) % videos.length];
 ---
 
-<Layout title={`${video.title} — Dante Samacoits`}>
+<Layout
+  title={`${video.title} — Dante Samacoits`}
+  description={video.description}
+  ogImage={video.thumbnail}
+  ogType="article">
   <Navbar />
   <VideoLayout video={video} prev={prev} next={next} />
   <Footer />

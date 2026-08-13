@@ -2,11 +2,36 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 
+/*
+  Layout base con SEO (09-seo-accesibilidad-performance.md).
+  Title, description, canonical, Open Graph y Twitter/X cards.
+  Cada página pasa su own title/description/ogImage — no se reusa el meta
+  genérico del Home en las páginas internas (proyectos/videos las generan
+  desde sus propios datos).
+*/
+
 interface Props {
   title?: string;
+  description?: string;
+  ogImage?: string; // ruta pública, ej. "/og-image.png" o "/assets/..."
+  ogType?: 'website' | 'article';
 }
 
-const { title = 'Dante Samacoits' } = Astro.props;
+// Meta description por defecto (Home, según 09-seo-accesibilidad-performance.md).
+const HOME_DESCRIPTION =
+  'Portfolio personal de Dante Samacoits. Desarrollo de software, proyectos web, bases de datos y producción audiovisual.';
+
+const {
+  title = 'Dante Samacoits',
+  description = HOME_DESCRIPTION,
+  ogImage = '/og-image.png',
+  ogType = 'website',
+} = Astro.props;
+
+const SITE_NAME = 'Dante Samacoits';
+const siteUrl = Astro.site!;
+const pageUrl = new URL(Astro.url.pathname, siteUrl);
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 
 /*
   Transición default entre páginas (Fase 5, 07-animaciones.md):
@@ -34,6 +59,23 @@ const pageTransition = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter / X cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <ClientRouter />
 
