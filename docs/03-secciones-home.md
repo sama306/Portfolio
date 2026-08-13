@@ -91,11 +91,11 @@ Reglas:
 
 Se mantiene igual que en la v1 — categorizado, no una lista plana. Ubicación en el flujo: después de Trayectoria, antes de Featured Work (el mockup de referencia no muestra esta sección explícitamente, pero el usuario la pidió desde el inicio y sigue siendo relevante — se integra con la misma identidad visual: badges con borde `outline-variant` que pasan a `tertiary` en hover, igual que los badges de herramientas en "The Toolkit" de la página de Videos).
 
-**Lenguajes:** Python, C, SQL, Assembly 8086, HTML, CSS, JavaScript
-**Frameworks / Tecnologías:** Astro, React, .NET, Kivy
+**Lenguajes:** Python, C, SQL, Assembly 8086, HTML, CSS, JavaScript, TypeScript
+**Frameworks / Tecnologías:** Astro, React, Tailwind CSS, Express, Prisma, GSAP, JWT, .NET, Kivy
 **Bases de datos:** PostgreSQL, SQL Server
 **Herramientas:** Git, GitHub, Visual Studio, VS Code, SSMS
-**Diseño / Multimedia:** Photoshop, Illustrator, Premiere Pro, Edición audiovisual
+**Diseño / Multimedia:** Photoshop, Illustrator, Premiere Pro, Sony Vegas, Edición audiovisual
 
 ---
 
