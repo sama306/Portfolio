@@ -63,7 +63,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Ajustar Tablet
 - [x] Ajustar Mobile
 - [x] Menú hamburguesa funcional
-- [ ] Videos/imágenes responsive
+- [x] Videos/imágenes responsive
 - [ ] Correr el checklist completo de `08-responsive-mobile.md`
 
 ## Fase 7 — Optimización final
