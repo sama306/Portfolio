@@ -1,0 +1,22 @@
+{
+  "name": "Dante Samacoits — Software Developer",
+  "short_name": "Dante",
+  "description": "Portfolio personal de Dante Samacoits. Desarrollo de software, proyectos web, bases de datos y producción audiovisual.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#051424",
+  "theme_color": "#051424",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

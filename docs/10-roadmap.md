@@ -69,7 +69,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 ## Fase 7 — Optimización final
 
 - [x] SEO (title, description, OG, sitemap, robots.txt)
-- [ ] Favicon
+- [x] Favicon
 - [ ] Accesibilidad (revisión con checklist de `09-seo-accesibilidad-performance.md`)
 - [ ] Performance (Lighthouse)
 - [ ] Revisión general de contraste en dark theme

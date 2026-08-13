@@ -62,6 +62,18 @@ const pageTransition = {
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl} />
 
+    <!--
+      Favicons (Fase 7, 09-seo-accesibilidad-performance.md).
+      SVG como fuente principal (badge Obsidian Slate), ICO como fallback legacy,
+      apple-touch-icon para iOS y manifest para install/Android.
+      theme-color con la surface del sistema (#051424).
+    -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#051424" />
+
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
