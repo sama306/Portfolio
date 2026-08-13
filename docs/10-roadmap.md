@@ -68,8 +68,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 
 ## Fase 7 — Optimización final
 
-- [x] Correr el checklist completo de `08-responsive-mobile.md` (paso final Fase 6: se verificó en 375/414/768 + desktop y se corrigieron áreas táctiles <44px, wordmark responsivo del navbar, layout shift de la galería y apilado de prev/next en detalle)
-- [] SEO (title, description, OG, sitemap, robots.txt)
+- [x] SEO (title, description, OG, sitemap, robots.txt)
 - [ ] Favicon
 - [ ] Accesibilidad (revisión con checklist de `09-seo-accesibilidad-performance.md`)
 - [ ] Performance (Lighthouse)
