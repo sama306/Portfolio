@@ -1,10 +1,11 @@
 ---
+import BrandIcon from './BrandIcon.astro';
 ---
 
 <!--
   Footer (ver 03-secciones-home.md §7).
   Fondo surface, borde superior outline-variant, sin sombra.
-  Links horizontales: GitHub, LinkedIn, Instagram, Email (sin Twitter).
+  Links horizontales con logos de marca: GitHub, LinkedIn, Instagram.
   Contenido siempre visible: sin data-reveal (un footer corto al final de la
   página nunca cruza el trigger 'top 85%' del reveal y quedaría oculto).
 -->
@@ -15,31 +16,34 @@
       Dante Valentin Samacoits
     </div>
 
-    <!-- Links -->
-    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+    <!-- Links con logos -->
+    <div class="flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
       <a
         href="https://github.com/sama306"
         target="_blank"
         rel="noreferrer"
-        class="hit-area font-body-md text-body-md text-on-surface-variant transition-colors hover:text-tertiary"
+        class="hit-area text-on-surface-variant transition-colors hover:text-tertiary"
       >
-        GitHub
+        <BrandIcon name="GitHub" class="h-6 w-6" />
+        <span class="sr-only">GitHub</span>
       </a>
       <a
         href="https://www.linkedin.com/in/dante-valentin-samacoits"
         target="_blank"
         rel="noreferrer"
-        class="hit-area font-body-md text-body-md text-on-surface-variant transition-colors hover:text-tertiary"
+        class="hit-area text-on-surface-variant transition-colors hover:text-tertiary"
       >
-        LinkedIn
+        <BrandIcon name="LinkedIn" class="h-6 w-6" />
+        <span class="sr-only">LinkedIn</span>
       </a>
       <a
         href="https://www.instagram.com/valen_sama1/"
         target="_blank"
         rel="noreferrer"
-        class="hit-area font-body-md text-body-md text-on-surface-variant transition-colors hover:text-tertiary"
+        class="hit-area text-on-surface-variant transition-colors hover:text-tertiary"
       >
-        Instagram
+        <BrandIcon name="Instagram" class="h-6 w-6" />
+        <span class="sr-only">Instagram</span>
       </a>
     </div>
 
