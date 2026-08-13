@@ -93,7 +93,7 @@ export default function VideoGrid({ videos, initialCount = 6 }: Props) {
   const hasMore = filtered.length > visible;
 
   const filterBtn = (isActive: boolean) =>
-    `cursor-pointer rounded border px-4 py-2 font-label-caps text-label-caps transition-colors duration-300 ${
+    `cursor-pointer rounded border px-4 py-2 min-h-11 font-label-caps text-label-caps transition-colors duration-300 ${
       isActive
         ? 'border-tertiary bg-tertiary/10 text-tertiary'
         : 'border-outline-variant text-on-surface-variant hover:border-tertiary hover:text-tertiary'
@@ -136,7 +136,7 @@ export default function VideoGrid({ videos, initialCount = 6 }: Props) {
           <button
             type="button"
             onClick={() => setVisible((count) => count + initialCount)}
-            className="cursor-pointer rounded border border-outline-variant px-12 py-3 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+            className="cursor-pointer rounded border border-outline-variant px-12 py-3 min-h-11 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
           >
             Ver más trabajos
           </button>

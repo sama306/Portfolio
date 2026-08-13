@@ -64,7 +64,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] Ajustar Mobile
 - [x] Menú hamburguesa funcional
 - [x] Videos/imágenes responsive
-- [ ] Correr el checklist completo de `08-responsive-mobile.md`
+- [x] Correr el checklist completo de `08-responsive-mobile.md` (paso final Fase 6: se verificó en 375/414/768 + desktop y se corrigieron áreas táctiles <44px, wordmark responsivo del navbar, layout shift de la galería y apilado de prev/next en detalle)
 
 ## Fase 7 — Optimización final
 

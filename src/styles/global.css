@@ -264,6 +264,21 @@ html[data-menu-open] body {
   border-left: 4px solid var(--color-tertiary);
 }
 
+/* ─── Hit-area ampliado para links de texto (08-responsive-mobile.md) ──
+   Links de texto (footer, "Volver a…", "Ver más →", etc.) con área táctil de
+   solo ~20px. Esta clase agranda la zona clicable sin cambiar el layout:
+   un ::after transparente que se extiende 14px en vertical / 16px en
+   horizontal alrededor del texto (la pseudo también recibe los clicks). */
+.hit-area {
+  position: relative;
+}
+
+.hit-area::after {
+  content: '';
+  position: absolute;
+  inset: -14px -16px;
+}
+
 /* ─── View Transitions (Fase 5, 07-animaciones.md) ────────────
    Keyframes de la transición default definida en Layout.astro
    (transition:animate en <html>). La página vieja hace fade-out y la

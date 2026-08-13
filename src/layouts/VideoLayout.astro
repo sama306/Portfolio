@@ -62,7 +62,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
   <header data-reveal>
     <a
       href="/videos"
-      class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
+      class="hit-area inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
     >
       <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
       Volver a videos
@@ -159,12 +159,12 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
 
   <!-- ─── Prev / Next video ────────────────────────────────── -->
   <section class="mt-section-gap border-t border-outline-variant pt-16" data-reveal>
-    <div class="flex items-stretch justify-between gap-gutter">
+    <div class="flex flex-col items-stretch gap-gutter md:flex-row md:justify-between">
       {
         prev ? (
           <a
             href={`/videos/${prev.slug}`}
-            class="group max-w-[50%] rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary"
+            class="group w-full rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary md:max-w-[50%]"
           >
             <span class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
               <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
@@ -180,7 +180,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
         next ? (
           <a
             href={`/videos/${next.slug}`}
-            class="group ml-auto max-w-[50%] rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary"
+            class="group w-full rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary md:ml-auto md:max-w-[50%]"
           >
             <span class="mb-2 flex items-center justify-end gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
               Siguiente

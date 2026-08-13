@@ -180,9 +180,16 @@
   class="fixed top-0 z-50 w-full border-b border-outline-variant bg-secondary-container/40 backdrop-blur-xl transition-colors duration-300"
 >
   <div class="mx-auto flex h-20 w-full max-w-[1200px] items-center justify-between px-gutter">
-    <!-- Wordmark (placeholder de texto, no un logo) -->
-    <a href="/" class="min-w-0 truncate font-display-lg text-primary text-[28px] tracking-tighter">
-      Dante Valentin Samacoits
+    <!--
+      Wordmark (placeholder de texto, no un logo).
+      Responsive (08-responsive-mobile.md): el nombre completo no entra en el
+      navbar durante toda la tablet (768–~840px) con los links + CTA, así que en
+      <lg se muestra la versión corta y en lg+ el nombre completo. Un solo link
+      (a11y), cada versión es un <span> truncable.
+    -->
+    <a href="/" class="flex min-w-0 items-center py-2 font-display-lg text-primary tracking-tighter">
+      <span class="truncate text-[24px] lg:hidden">Dante S.</span>
+      <span class="hidden truncate text-[28px] lg:block">Dante Valentin Samacoits</span>
     </a>
 
     <!-- Links de navegación (desktop) -->
@@ -193,7 +200,7 @@
         data-nav-link
         aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
         class:list={[
-          'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+          'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
           Astro.url.pathname === '/' && 'nav-link active text-tertiary',
         ]}
       >
@@ -204,7 +211,7 @@
         data-nav-link
         aria-current={Astro.url.pathname.startsWith('/projects') ? 'page' : undefined}
         class:list={[
-          'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+          'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
           Astro.url.pathname.startsWith('/projects') && 'nav-link active text-tertiary',
         ]}
       >
@@ -215,7 +222,7 @@
         data-nav-link
         aria-current={Astro.url.pathname.startsWith('/videos') ? 'page' : undefined}
         class:list={[
-          'font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+          'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
           Astro.url.pathname.startsWith('/videos') && 'nav-link active text-tertiary',
         ]}
       >
@@ -226,7 +233,7 @@
     <!-- CTA primario sólido cyan (desktop). Lleva a la sección Contacto del Home. -->
     <a
       href="/#contacto"
-      class="font-label-caps text-label-caps hidden rounded bg-tertiary px-6 py-3 text-on-tertiary transition-colors duration-300 hover:bg-tertiary-fixed-dim md:block"
+      class="font-label-caps text-label-caps hidden rounded bg-tertiary px-6 py-4 text-on-tertiary transition-colors duration-300 hover:bg-tertiary-fixed-dim md:block"
     >
       Contactarme
     </a>
@@ -272,7 +279,7 @@
       data-nav-link
       aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
       class:list={[
-        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
         Astro.url.pathname === '/' && 'nav-link active text-tertiary',
       ]}
     >
@@ -283,7 +290,7 @@
       data-nav-link
       aria-current={Astro.url.pathname.startsWith('/projects') ? 'page' : undefined}
       class:list={[
-        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
         Astro.url.pathname.startsWith('/projects') && 'nav-link active text-tertiary',
       ]}
     >
@@ -294,7 +301,7 @@
       data-nav-link
       aria-current={Astro.url.pathname.startsWith('/videos') ? 'page' : undefined}
       class:list={[
-        'font-label-caps text-label-caps py-5 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
+        'font-label-caps text-label-caps pt-7 pb-1 text-on-surface-variant transition-colors duration-300 hover:text-tertiary',
         Astro.url.pathname.startsWith('/videos') && 'nav-link active text-tertiary',
       ]}
     >

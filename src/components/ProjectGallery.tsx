@@ -63,7 +63,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             type="button"
             onClick={() => openAt(i)}
             aria-label="Ampliar imagen"
-            className="group cursor-zoom-in overflow-hidden rounded-lg border border-outline-variant bg-surface-container text-left transition-colors duration-300 hover:border-tertiary"
+            className="group aspect-video cursor-zoom-in overflow-hidden rounded-lg border border-outline-variant bg-surface-container text-left transition-colors duration-300 hover:border-tertiary"
           >
             <img
               className="h-full w-full object-cover object-top filter grayscale transition-all duration-700 group-hover:grayscale-0"

@@ -51,7 +51,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
   <header data-reveal>
     <a
       href="/projects"
-      class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
+      class="hit-area inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
     >
       <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
       Volver a proyectos
@@ -78,7 +78,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
           href={project.github}
           target="_blank"
           rel="noreferrer"
-          class="rounded border border-outline-variant px-6 py-3 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+          class="rounded border border-outline-variant px-6 py-3 min-h-11 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
         >
           GitHub
         </a>
@@ -88,7 +88,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
           href={project.demo}
           target="_blank"
           rel="noreferrer"
-          class="rounded border border-outline-variant px-6 py-3 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
+          class="rounded border border-outline-variant px-6 py-3 min-h-11 font-label-caps text-label-caps text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
         >
           Demo
         </a>
@@ -179,12 +179,12 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
 
   <!-- ─── Prev / Next proyecto ─────────────────────────────── -->
   <section class="mt-section-gap border-t border-outline-variant pt-16" data-reveal>
-    <div class="flex items-stretch justify-between gap-gutter">
+    <div class="flex flex-col items-stretch gap-gutter md:flex-row md:justify-between">
       {
         prev ? (
           <a
             href={`/projects/${prev.slug}`}
-            class="group max-w-[50%] rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary"
+            class="group w-full rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary md:max-w-[50%]"
           >
             <span class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
               <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
@@ -200,7 +200,7 @@ const screenshots = project.screenshots && project.screenshots.length > 0 ? proj
         next ? (
           <a
             href={`/projects/${next.slug}`}
-            class="group ml-auto max-w-[50%] rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary"
+            class="group w-full rounded-lg border border-outline-variant p-6 text-right transition-colors duration-300 hover:border-tertiary md:ml-auto md:max-w-[50%]"
           >
             <span class="mb-2 flex items-center justify-end gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
               Siguiente
