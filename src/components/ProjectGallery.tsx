@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface Props {
   images: string[];
@@ -45,13 +46,44 @@ export default function ProjectGallery({ images, alt }: Props) {
     }
     closeButtonRef.current?.focus();
 
+    // Modal completo (a11y, 09-seo-accesibilidad-performance.md): el resto de la
+    // página queda inert mientras el lightbox está abierto y Tab/Shift+Tab quedan
+    // atrapados dentro del diálogo. Al cerrar se limpia todo y vuelve el foco al
+    // trigger.
+    const background = document.querySelector('main') as HTMLElement | null;
+    background?.setAttribute('inert', '');
+    document.querySelector('footer')?.setAttribute('inert', '');
+
+    const dialogRef = closeButtonRef;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowRight') go(1);
       if (e.key === 'ArrowLeft') go(-1);
+      if (e.key !== 'Tab') return;
+      const root = dialogRef.current?.parentElement;
+      if (!root) return;
+      const focusables = Array.from(
+        root.querySelectorAll<HTMLElement>('button, [href], [tabindex]:not([tabindex="-1"])')
+      ).filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && (active === first || !root.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !root.contains(active))) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      background?.removeAttribute('inert');
+      document.querySelector('footer')?.removeAttribute('inert');
+    };
   }, [open, close, go]);
 
   return (
@@ -62,7 +94,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             key={src}
             type="button"
             onClick={() => openAt(i)}
-            aria-label="Ampliar imagen"
+            aria-label={`Ampliar imagen: ${alt} — vista ${i + 1}`}
             className="group aspect-video cursor-zoom-in overflow-hidden rounded-lg border border-outline-variant bg-surface-container text-left transition-colors duration-300 hover:border-tertiary"
           >
             <img
@@ -76,14 +108,15 @@ export default function ProjectGallery({ images, alt }: Props) {
         ))}
       </div>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Imagen ampliada"
-          onClick={close}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-surface/95 p-4 backdrop-blur-md md:p-10"
-        >
+      {open &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Imagen ampliada"
+            onClick={close}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-surface/95 p-4 backdrop-blur-md md:p-10"
+          >
           <button
             ref={closeButtonRef}
             type="button"
@@ -135,8 +168,9 @@ export default function ProjectGallery({ images, alt }: Props) {
           <p className="absolute bottom-4 left-1/2 -translate-x-1/2 font-label-caps text-label-caps text-on-surface-variant">
             {index + 1} / {images.length}
           </p>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </>
   );
 }

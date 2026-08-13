@@ -115,8 +115,7 @@ const levelOpacity = [0.35, 0.25, 0.5, 0.75, 1];
               <svg
                 viewBox={`0 0 ${chartW} ${chartH}`}
                 class="h-auto w-full"
-                role="img"
-                aria-label="Heatmap decorativo de contribuciones en GitHub"
+                aria-hidden="true"
               >
                 {heatmap.map((row, r) =>
                   row.map((level, c) => (
