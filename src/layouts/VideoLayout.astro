@@ -1,5 +1,6 @@
 ---
 import type { VideoWork } from '../data/videos';
+import Icon from '../components/Icon.astro';
 
 interface Props {
   video: VideoWork;
@@ -64,7 +65,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
       href="/videos"
       class="hit-area inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 hover:text-tertiary"
     >
-      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+      <Icon name="arrow_back" class="h-4 w-4" />
       Volver a videos
     </a>
 
@@ -167,7 +168,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
             class="group w-full rounded-lg border border-outline-variant p-6 transition-colors duration-300 hover:border-tertiary md:max-w-[50%]"
           >
             <span class="mb-2 flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
-              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
+              <Icon name="arrow_back" class="h-4 w-4" />
               Anterior
             </span>
             <span class="font-body-lg text-body-lg font-semibold text-on-surface">{prev.title}</span>
@@ -184,7 +185,7 @@ const embedUrl = toEmbedUrl(video.youtubeUrl);
           >
             <span class="mb-2 flex items-center justify-end gap-2 font-label-caps text-label-caps text-on-surface-variant transition-colors duration-300 group-hover:text-tertiary">
               Siguiente
-              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+              <Icon name="arrow_forward" class="h-4 w-4" />
             </span>
             <span class="font-body-lg text-body-lg font-semibold text-on-surface">{next.title}</span>
           </a>

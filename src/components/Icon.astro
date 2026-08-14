@@ -1,0 +1,35 @@
+---
+import { ICONS, type IconName } from './icons';
+
+/*
+  Icon (Astro) — para usar en templates .astro, donde el atributo `class` es
+  nativo (el renderer de @astrojs/react lo elimina de los props en server
+  render, por eso las islas de React usan Icon.tsx con className).
+*/
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className, ...rest } = Astro.props;
+const parts = ICONS[name];
+---
+
+<svg
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class:list={[className]}
+  {...rest}
+>
+  {
+    parts.map((part) =>
+      part.type === 'circle' ? <circle {...part.attrs} /> : <path {...part.attrs} />
+    )
+  }
+</svg>

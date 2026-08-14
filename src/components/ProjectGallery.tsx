@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import Icon from './Icon.tsx';
 
 interface Props {
   images: string[];
@@ -124,9 +125,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             aria-label="Cerrar"
             className="absolute right-4 top-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-outline-variant bg-surface-container text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary"
           >
-            <span className="material-symbols-outlined text-[24px]" aria-hidden="true">
-              close
-            </span>
+            <Icon name="close" className="h-6 w-6" />
           </button>
 
           {/* Prev */}
@@ -139,9 +138,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             aria-label="Vista anterior"
             className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-outline-variant bg-surface-container text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary md:left-6"
           >
-            <span className="material-symbols-outlined text-[24px]" aria-hidden="true">
-              arrow_back
-            </span>
+            <Icon name="arrow_back" className="h-6 w-6" />
           </button>
 
           {/* Next */}
@@ -154,9 +151,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             aria-label="Vista siguiente"
             className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-outline-variant bg-surface-container text-on-surface transition-colors duration-300 hover:border-tertiary hover:text-tertiary md:right-6"
           >
-            <span className="material-symbols-outlined text-[24px]" aria-hidden="true">
-              arrow_forward
-            </span>
+            <Icon name="arrow_forward" className="h-6 w-6" />
           </button>
 
           <img

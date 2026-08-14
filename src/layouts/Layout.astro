@@ -2,6 +2,18 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 
+// Fuentes self-hosted (Fase 7, performance): @fontsource emite los woff2
+// localmente (sin CDN de Google ni CSS render-blocking externo). Se importa
+// solo el subset latin. Además se preloaden las 2 fuentes críticas (headline
+// Montserrat 700 + body Inter 400) para cortar el render-delay del LCP.
+import '@fontsource/montserrat/latin-600.css';
+import '@fontsource/montserrat/latin-700.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/geist/latin-400.css';
+import '@fontsource/geist/latin-600.css';
+import montserrat700Url from '@fontsource/montserrat/files/montserrat-latin-700-normal.woff2?url';
+import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+
 /*
   Layout base con SEO (09-seo-accesibilidad-performance.md).
   Title, description, canonical, Open Graph y Twitter/X cards.
@@ -95,16 +107,13 @@ const pageTransition = {
       document.documentElement.classList.add('js');
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Inter:wght@400&family=Montserrat:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+    <!--
+      Fuentes self-hosted (Fase 7): los woff2 críticos se preloaden para que el
+      render no espere la font del headline. El CSS de @fontsource se bundlea
+      en el CSS global (sin requests externos render-blocking).
+    -->
+    <link rel="preload" as="font" type="font/woff2" href={montserrat700Url} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={inter400Url} crossorigin />
   </head>
   <body>
     <!--

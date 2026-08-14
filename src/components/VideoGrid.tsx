@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { VideoWork } from '../data/videos';
+import Icon from './Icon.tsx';
 
 interface Props {
   videos: VideoWork[];
@@ -43,12 +44,7 @@ function VideoGridCard({ video }: { video: VideoWork }) {
           className="absolute inset-0 flex items-center justify-center bg-primary-container/30 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100"
           aria-hidden="true"
         >
-          <span
-            className="material-symbols-outlined text-5xl text-tertiary"
-            style={{ fontVariationSettings: "'FILL' 1" }}
-          >
-            play_circle
-          </span>
+        <Icon name="play_circle" className="h-12 w-12 text-tertiary" />
         </div>
       </div>
 

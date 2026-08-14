@@ -56,8 +56,12 @@ const init = () => {
   requestAnimationFrame(() => ScrollTrigger.refresh());
 };
 
-// Carga inicial: medir cuando imágenes/fuentes ya cargaron.
-window.addEventListener('load', init);
+// Carga inicial: se arma apenas el script corre (al final del <body>, el DOM ya
+// está parseado). Antes se esperaba `window.load`, lo que dejaba el Hero con
+// opacity 0 hasta cargar TODAS las imágenes — retrasaba el LCP en producción.
+// Los contenedores usan aspect-ratio fijos, así que el layout es estable sin
+// imágenes y los triggers se miden al entrar al viewport.
+init();
 
 // Carga inicial + cada navegación SPA (registrado una sola vez).
 if (!(window as unknown as Record<string, unknown>).__revealBound) {

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { Project } from '../data/projects';
+import Icon from './Icon.tsx';
 
 interface Props {
   projects: Project[];
@@ -52,12 +53,10 @@ function ProjectGridCard({ project }: { project: Project }) {
           <h2 className="font-headline-md text-headline-md text-on-surface transition-colors duration-300 group-hover:text-tertiary">
             {project.title}
           </h2>
-          <span
-            aria-hidden="true"
-            className="material-symbols-outlined text-outline-variant transition-colors duration-300 group-hover:text-tertiary"
-          >
-            open_in_new
-          </span>
+          <Icon
+            name="open_in_new"
+            className="h-6 w-6 text-outline-variant transition-colors duration-300 group-hover:text-tertiary"
+          />
         </div>
         <p className="font-body-md text-body-md text-on-surface-variant line-clamp-3">
           {project.description}

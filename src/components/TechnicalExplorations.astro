@@ -1,5 +1,6 @@
 ---
 import { projects } from '../data/projects';
+import Icon from './Icon.astro';
 
 const projectCount = projects.length;
 const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server', 'Python'];
@@ -22,9 +23,7 @@ const STACK = ['Astro', 'React', 'TypeScript', '.NET', 'PostgreSQL', 'SQL Server
       <div class="code-block-border overflow-hidden self-start rounded bg-surface-container">
         <div class="flex items-center justify-between border-b border-outline-variant px-5 py-3">
           <span class="font-label-caps text-label-caps text-on-surface-variant">dante.py</span>
-          <span class="material-symbols-outlined text-on-surface-variant text-[18px]" aria-hidden="true"
-            >terminal</span
-          >
+          <Icon name="terminal" class="h-[18px] w-[18px] text-on-surface-variant" />
         </div>
         <pre class="overflow-x-auto px-5 py-4 font-mono-code text-mono-code text-on-surface-variant"><code><span class="text-outline">def</span> <span class="text-tertiary">dante</span>():
     rol <span class="text-outline">=</span> <span class="text-on-surface">"Software Developer"</span>

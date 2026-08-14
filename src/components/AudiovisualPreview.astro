@@ -1,5 +1,6 @@
 ---
 import { videos } from '../data/videos';
+import Icon from './Icon.astro';
 
 // Cinematic Editing — sección 5 del Home (ver 03-secciones-home.md §5).
 // Preview de los trabajos audiovisuales con `featured: true` (content-driven,
@@ -51,7 +52,7 @@ const featured = videos.filter((video) => video.featured);
               class="absolute inset-0 flex items-center justify-center bg-primary-container/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
               aria-hidden="true"
             >
-              <span class="material-symbols-outlined text-4xl text-tertiary">play_circle</span>
+              <Icon name="play_circle" class="h-9 w-9 text-tertiary" />
             </div>
           </div>
           <h3 class="font-body-md text-body-md font-semibold text-on-surface transition-colors duration-300 group-hover:text-tertiary">
