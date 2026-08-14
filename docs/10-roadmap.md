@@ -71,7 +71,7 @@ Pensado para trabajarse en sesiones separadas de opencode. Cada fase puede ser u
 - [x] SEO (title, description, OG, sitemap, robots.txt)
 - [x] Favicon
 - [x] Accesibilidad (revisión con checklist de `09-seo-accesibilidad-performance.md`: contraste WCAG AA verificado en toda la paleta —incluido el cyan `tertiary`—, lightbox de ProjectGallery con focus trap + `inert` vía portal, heatmap del Hero a `aria-hidden`. Lighthouse Accessibility 100 en Home/Proyectos/Videos/detalles, desktop y mobile)
-- [ ] Performance (Lighthouse)
+- [x] Performance (Lighthouse)
 
 ## Backlog / funcionalidades futuras (no prioritario ahora)
 
